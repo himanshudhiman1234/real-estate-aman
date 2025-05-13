@@ -1,0 +1,102 @@
+<%- include('../partials/seller/navbar') %>
+
+                <!-- End of Topbar -->
+<style>
+ .bg-green {
+    background-color: #d4edda;
+    color: #155724;
+    font-weight: bold;
+  }
+  .bg-red {
+    background-color: #f8d7da;
+    color: #721c24;
+    font-weight: bold;
+  }
+</style>
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <!-- <h1 class="h3 mb-2 text-gray-800">Show property</   h1> -->
+                    <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+                        For more information about DataTables, please visit the <a target="_blank"
+                            href="https://datatables.net">official DataTables documentation</a>.</p> -->
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">All Listed Properties</h6>
+                        </div>
+                         <% if (success_msg && success_msg.length > 0) { %>
+  <div class="alert alert-success m-3"><%= success_msg[0] %></div>
+<% } %>
+
+<% if (error_msg && error_msg.length > 0) { %>
+  <div class="alert alert-danger m-3"><%= error_msg[0] %></div>
+<% } %>
+
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Property Title</th>
+                                            <th>Image</th>
+                                            <th>Location</th>
+                                            <th>Land Type</th>
+                                            <th>Status</th>
+                                            <th>Edit </th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Property Title</th>
+                                            <th>Image</th>
+                                            <th>Location</th>
+                                            <th>Land Type</th>
+                                            <th>Status</th>
+                                            <th>Edit </th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                      
+
+                                        <% properties.forEach(property => { %>
+                                            <tr>
+                                                <td><%= property.title %></td>
+                                             
+                                                    <td>
+                                                        <% if (property.images && property.images.length > 0) { %>
+                                                            <img src="/uploads/<%= property.images[0] %>" alt="image" width="100">
+                                                        <% } else { %>
+                                                            No image
+                                                        <% } %>
+                                                    </td>
+                                             
+                                                    <td><%= property.city %></td>
+                                                    <td><%= property.LandType %></td>
+                                                <td class="<%= property.status == 1 ? 'bg-green' : 'bg-red' %>"><%=  property.status == 1  ? "Approved" : "Not Approved" %></td>
+
+                                                <td><a href="/seller/edit-property/<%= property._id %>">Edit</a></td>
+                                                <td> <form method="POST" action="/seller/property-delete/<%= property._id %>">
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </form></td>
+                                            </tr>
+                                            <% }); %>
+                                            
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+<%- include('../partials/seller/footer') %>
+     

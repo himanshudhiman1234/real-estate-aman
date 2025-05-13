@@ -1,0 +1,394 @@
+<%- include('../partials/frontend/header') %>
+
+<div class="breadcrumb-area bg-overlay-2" style="background-image:url('assets/img/other/6.png')">
+    <div class="container">
+        <div class="breadcrumb-inner">
+            <div class="section-title text-center">
+                <h2 class="page-title">Property Grid</h2>
+                <ul class="page-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li>Property Grid</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb end --> 
+
+<!-- blog-page- Start --> 
+<div class="blog-page-area pt-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="product-search-inner bg-main">
+                    <div class="row custom-gutters-20">
+                        <div class="col-md-3 align-self-center">
+                            <h5> <%= totalCount %> Properties</h5>
+                        </div>
+                        <div class="col-md-6 mt-2 mt-md-0">
+                            <div class="widget-search">
+                                <form action="/properties" method="get">
+                                <div class="single-search-inner">
+
+                                    <input type="text" name="search" value="<%= typeof search !== 'undefined' ? search : '' %>" placeholder="Search your address">
+                                    <button><i class="la la-search"></i></button>
+                                </div>
+                          
+                            </div>
+                        </div>
+                        <div class="col-md-3 mt-2 mt-md-0 align-self-center">
+                            <div class="single-select-inner">
+                                <select name="sort" onchange="this.form.submit()">
+                                    <option value="">Sort By</option>
+                                    <option value="asc" <%= sort === 'asc' ? 'selected' : '' %>>Price: Low to High</option>
+                                    <option value="desc" <%= sort === 'desc' ? 'selected' : '' %>>Price: High to Low</option>
+                                  </select>
+                                  
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                </div>        
+            </div>    
+            <% properties.forEach(property => { %>  
+                <a href="/property-details/<%= property._id %>">  
+            <div class="col-lg-4 col-md-6">
+                <div class="single-product-wrap style-2">
+                    <div class="thumb">
+                                                        <% if (property.image ) { %>
+    <img src="/uploads/<%= property.images[0] %>" alt="img">
+<% } else { %>
+    <img src="/frontend/img/banner/1.jpg" alt="img">
+<% } %>
+                        <!-- <img src="/uploads/<%= property.images[0] %>" alt="img"> -->
+                        <div class="product-wrap-details">
+                            <div class="media">
+                                <!-- <div class="author">
+                                    <img src="/frontend/img/author/1.png" alt="img">           
+                                </div> -->
+                                <div class="media-body">
+                                    <!-- <h6><a href="#">Owner Name</a></h6> -->
+                                    <p>
+                                        <!-- <img src="/frontend/img/icon/location-alt.png" alt="img"> -->
+                                        <%= property.state %> </p>
+                                </div>
+                                <a class="fav-btn float-right" href="#">
+                                    <!-- <i class="far fa-heart"></i> -->
+                                </a>
+                            </div>
+                        </div> 
+                    </div> 
+                    <div class="product-details-inner">
+                        <h4><a href="property-details.html"><%= property.address %></a></h4>
+                        <ul class="meta-inner">
+                            <!-- <li><img src="/frontend/img/icon/location2.png" alt="img"><%= property.city %></li> -->
+                            <li><a href="#">For Sell</a></li>
+                        </ul>
+                        <p><%= property.description %> </p>
+                        <span class="price">$ <%= property.price %></span>
+                    </div>
+                    <div class="product-meta-bottom style-2">
+                        <span><%= property.LandType %><span>Land Type</span></span>
+                        <span class="border-none"><%= property.city %> <span>City</span></span>
+                        <span><%= property.country %>  <span>Country</span></span>
+                    </div>         
+                </div>
+            </div>
+        </a>
+            <% }); %>
+            <!-- <div class="col-lg-4 col-md-6">
+                <div class="single-product-wrap style-2">
+                    <div class="thumb">
+                        <img src="/frontend/img/project/16.png" alt="img">
+                        <div class="product-wrap-details">
+                            <div class="media">
+                                <div class="author">
+                                    <img src="/frontend/img/author/1.png" alt="img">           
+                                </div>
+                                <div class="media-body">
+                                    <h6><a href="#">Owner Name</a></h6>
+                                    <p><img src="/frontend/img/icon/location-alt.png" alt="img">New York real estate </p>
+                                </div>
+                                <a class="fav-btn float-right" href="#"><i class="far fa-heart"></i></a>
+                            </div>
+                        </div> 
+                    </div> 
+                    <div class="product-details-inner">
+                        <h4><a href="property-details.html">Family House</a></h4>
+                        <ul class="meta-inner">
+                            <li><img src="/frontend/img/icon/location2.png" alt="img">New York</li>
+                            <li><a href="#">For Sell</a></li>
+                        </ul>
+                        <p>Lorem ipsum dolor  conseetur </p>
+                        <span class="price">$ 80,650.00</span>
+                    </div>
+                    <div class="product-meta-bottom style-2">
+                        <span>3 <span>Bedroom</span></span>
+                        <span class="border-none">2 <span>Bathroom</span></span>
+                        <span>1026 <span>sqft</span></span>
+                    </div>         
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="single-product-wrap style-2">
+                    <div class="thumb">
+                        <img src="/frontend/img/project/9.png" alt="img">
+                        <div class="product-wrap-details">
+                            <div class="media">
+                                <div class="author">
+                                    <img src="/frontend/img/author/1.png" alt="img">           
+                                </div>
+                                <div class="media-body">
+                                    <h6><a href="#">Owner Name</a></h6>
+                                    <p><img src="/frontend/img/icon/location-alt.png" alt="img">New York real estate </p>
+                                </div>
+                                <a class="fav-btn float-right" href="#"><i class="far fa-heart"></i></a>
+                            </div>
+                        </div> 
+                    </div> 
+                    <div class="product-details-inner">
+                        <h4><a href="property-details.html">Beach House</a></h4>
+                        <ul class="meta-inner">
+                            <li><img src="/frontend/img/icon/location2.png" alt="img">New York</li>
+                            <li><a href="#">For Sell</a></li>
+                        </ul>
+                        <p>Lorem ipsum dolor  consectur </p>
+                        <span class="price">$ 80,650.00</span>
+                    </div>
+                    <div class="product-meta-bottom style-2">
+                        <span>3 <span>Bedroom</span></span>
+                        <span class="border-none">2 <span>Bathroom</span></span>
+                        <span>1026 <span>sqft</span></span>
+                    </div>         
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="single-product-wrap style-2">
+                    <div class="thumb">
+                        <img src="/frontend/img/project/17.png" alt="img">
+                        <div class="product-wrap-details">
+                            <div class="media">
+                                <div class="author">
+                                    <img src="/frontend/img/author/1.png" alt="img">           
+                                </div>
+                                <div class="media-body">
+                                    <h6><a href="#">Owner Name</a></h6>
+                                    <p><img src="/frontend/img/icon/location-alt.png" alt="img">New York real estate </p>
+                                </div>
+                                <a class="fav-btn float-right" href="#"><i class="far fa-heart"></i></a>
+                            </div>
+                        </div> 
+                    </div> 
+                    <div class="product-details-inner">
+                        <h4><a href="property-details.html">Hotel Apartment</a></h4>
+                        <ul class="meta-inner">
+                            <li><img src="/frontend/img/icon/location2.png" alt="img">New York</li>
+                            <li><a href="#">For Sell</a></li>
+                        </ul>
+                        <p>Lorem ipsum dolor  conctetur </p>
+                        <span class="price">$ 80,650.00</span>
+                    </div>
+                    <div class="product-meta-bottom style-2">
+                        <span>3 <span>Bedroom</span></span>
+                        <span class="border-none">2 <span>Bathroom</span></span>
+                        <span>1026 <span>sqft</span></span>
+                    </div>         
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="single-product-wrap style-2">
+                    <div class="thumb">
+                        <img src="/frontend/img/project/3.png" alt="img">
+                        <div class="product-wrap-details">
+                            <div class="media">
+                                <div class="author">
+                                    <img src="/frontend/img/author/1.png" alt="img">           
+                                </div>
+                                <div class="media-body">
+                                    <h6><a href="#">Owner Name</a></h6>
+                                    <p><img src="/frontend/img/icon/location-alt.png" alt="img">New York real estate </p>
+                                </div>
+                                <a class="fav-btn float-right" href="#"><i class="far fa-heart"></i></a>
+                            </div>
+                        </div> 
+                    </div> 
+                    <div class="product-details-inner">
+                        <h4><a href="property-details.html">Daily Apartment</a></h4>
+                        <ul class="meta-inner">
+                            <li><img src="/frontend/img/icon/location2.png" alt="img">New York</li>
+                            <li><a href="#">For Sell</a></li>
+                        </ul>
+                        <p>Lorem ipsum dolor  conctetur </p>
+                        <span class="price">$ 80,650.00</span>
+                    </div>
+                    <div class="product-meta-bottom style-2">
+                        <span>3 <span>Bedroom</span></span>
+                        <span class="border-none">2 <span>Bathroom</span></span>
+                        <span>1026 <span>sqft</span></span>
+                    </div>         
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="single-product-wrap style-2">
+                    <div class="thumb">
+                        <img src="assets/img/project/4.png" alt="img">
+                        <div class="product-wrap-details">
+                            <div class="media">
+                                <div class="author">
+                                    <img src="assets/img/author/1.png" alt="img">           
+                                </div>
+                                <div class="media-body">
+                                    <h6><a href="#">Owner Name</a></h6>
+                                    <p><img src="assets/img/icon/location-alt.png" alt="img">New York real estate </p>
+                                </div>
+                                <a class="fav-btn float-right" href="#"><i class="far fa-heart"></i></a>
+                            </div>
+                        </div> 
+                    </div> 
+                    <div class="product-details-inner">
+                        <h4><a href="property-details.html">Villa House</a></h4>
+                        <ul class="meta-inner">
+                            <li><img src="assets/img/icon/location2.png" alt="img">New York</li>
+                            <li><a href="#">For Sell</a></li>
+                        </ul>
+                        <p>Lorem ipsum dolor  constetur </p>
+                        <span class="price">$ 80,650.00</span>
+                    </div>
+                    <div class="product-meta-bottom style-2">
+                        <span>3 <span>Bedroom</span></span>
+                        <span class="border-none">2 <span>Bathroom</span></span>
+                        <span>1026 <span>sqft</span></span>
+                    </div>         
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="single-product-wrap style-2">
+                    <div class="thumb">
+                        <img src="assets/img/project/6.png" alt="img">
+                        <div class="product-wrap-details">
+                            <div class="media">
+                                <div class="author">
+                                    <img src="assets/img/author/1.png" alt="img">           
+                                </div>
+                                <div class="media-body">
+                                    <h6><a href="#">Owner Name</a></h6>
+                                    <p><img src="assets/img/icon/location-alt.png" alt="img">New York real estate </p>
+                                </div>
+                                <a class="fav-btn float-right" href="#"><i class="far fa-heart"></i></a>
+                            </div>
+                        </div> 
+                    </div> 
+                    <div class="product-details-inner">
+                        <h4><a href="property-details.html">Sunshine Place</a></h4>
+                        <ul class="meta-inner">
+                            <li><img src="assets/img/icon/location2.png" alt="img">New York</li>
+                            <li><a href="#">For Sell</a></li>
+                        </ul>
+                        <p>Lorem ipsum dolor  consetur </p>
+                        <span class="price">$ 80,650.00</span>
+                    </div>
+                    <div class="product-meta-bottom style-2">
+                        <span>3 <span>Bedroom</span></span>
+                        <span class="border-none">2 <span>Bathroom</span></span>
+                        <span>1026 <span>sqft</span></span>
+                    </div>         
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="single-product-wrap style-2">
+                    <div class="thumb">
+                        <img src="assets/img/project/5.png" alt="img">
+                        <div class="product-wrap-details">
+                            <div class="media">
+                                <div class="author">
+                                    <img src="assets/img/author/1.png" alt="img">           
+                                </div>
+                                <div class="media-body">
+                                    <h6><a href="#">Owner Name</a></h6>
+                                    <p><img src="assets/img/icon/location-alt.png" alt="img">New York real estate </p>
+                                </div>
+                                <a class="fav-btn float-right" href="#"><i class="far fa-heart"></i></a>
+                            </div>
+                        </div> 
+                    </div> 
+                    <div class="product-details-inner">
+                        <h4><a href="property-details.html">Sunny Place</a></h4>
+                        <ul class="meta-inner">
+                            <li><img src="assets/img/icon/location2.png" alt="img">New York</li>
+                            <li><a href="#">For Sell</a></li>
+                        </ul>
+                        <p>Lorem ipsum dolor  consetur </p>
+                        <span class="price">$ 80,650.00</span>
+                    </div>
+                    <div class="product-meta-bottom style-2">
+                        <span>3 <span>Bedroom</span></span>
+                        <span class="border-none">2 <span>Bathroom</span></span>
+                        <span>1026 <span>sqft</span></span>
+                    </div>         
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="single-product-wrap style-2">
+                    <div class="thumb">
+                        <img src="assets/img/project/9.png" alt="img">
+                        <div class="product-wrap-details">
+                            <div class="media">
+                                <div class="author">
+                                    <img src="assets/img/author/1.png" alt="img">           
+                                </div>
+                                <div class="media-body">
+                                    <h6><a href="#">Owner Name</a></h6>
+                                    <p><img src="assets/img/icon/location-alt.png" alt="img">New York real estate </p>
+                                </div>
+                                <a class="fav-btn float-right" href="#"><i class="far fa-heart"></i></a>
+                            </div>
+                        </div> 
+                    </div> 
+                    <div class="product-details-inner">
+                        <h4><a href="property-details.html">Beach House</a></h4>
+                        <ul class="meta-inner">
+                            <li><img src="assets/img/icon/location2.png" alt="img">New York</li>
+                            <li><a href="#">For Sell</a></li>
+                        </ul>
+                        <p>Lorem ipsum dolor  consectur </p>
+                        <span class="price">$ 80,650.00</span>
+                    </div>
+                    <div class="product-meta-bottom style-2">
+                        <span>3 <span>Bedroom</span></span>
+                        <span class="border-none">2 <span>Bathroom</span></span>
+                        <span>1026 <span>sqft</span></span>
+                    </div>         
+                </div>
+            </div> -->
+            <div class="pagination-area text-center mt-4">
+                <ul class="pagination">
+                    <% if (currentPage > 1) { %>
+                        <li class="page-item">
+                            <a class="page-link" href="?search=<%= search %>&sort=<%= sort %>&page=<%= currentPage - 1 %>">
+                                <i class="la la-angle-double-left"></i>
+                            </a>
+                        </li>
+                    <% } %>
+            
+                    <% for (let i = 1; i <= totalPages; i++) { %>
+                        <li class="page-item <%= i === currentPage ? 'active' : '' %>">
+                            <a class="page-link" href="?search=<%= search %>&sort=<%= sort %>&page=<%= i %>"><%= i %></a>
+                        </li>
+                    <% } %>
+            
+                    <% if (currentPage < totalPages) { %>
+                        <li class="page-item">
+                            <a class="page-link" href="?search=<%= search %>&sort=<%= sort %>&page=<%= currentPage + 1 %>">
+                                <i class="la la-angle-double-right"></i>
+                            </a>
+                        </li>
+                    <% } %>
+                </ul>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+<%- include('../partials/frontend/footer') %>

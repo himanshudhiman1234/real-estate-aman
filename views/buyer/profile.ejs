@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Buyer Info Form</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f2f5;
+    }
+
+    /* Header Styles */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background-color: #3498db;
+      color: white;
+    }
+
+    header img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    header .logout {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    header .logout:hover {
+      background-color: #c0392b;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 50px 20px;
+    }
+
+    .dashboard-form {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      width: 400px;
+    }
+
+    .dashboard-form h2 {
+      margin-bottom: 20px;
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #34495e;
+      font-weight: 500;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      font-size: 14px;
+      transition: border 0.3s ease;
+    }
+
+    input:focus, select:focus {
+      border-color: #3498db;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background-color: #3498db;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header with Image and Logout -->
+  <header>
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <a href="/">
+            <img src="https://via.placeholder.com/40" alt="Profile" />
+        </a>
+      <span>Welcome, Buyer</span>
+    </div>
+    <a href="/logout" class="logout">Logout</a>
+  </header>
+
+  <div class="container">
+    <div class="dashboard-form">
+      <h2>Buyer Information</h2>
+      <form>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" value="<%= userEmail %>" placeholder="Enter your email" readonly>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" value="<%= phone %>" placeholder="Enter your phone number" readonly>
+        </div>
+
+        <div class="form-group">
+          <label for="role">Role</label>
+          <input type="tel" id="phone"  value="<%= role %>" placeholder="Enter your phone number" readonly>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

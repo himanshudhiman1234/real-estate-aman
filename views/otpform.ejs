@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verify OTP</title>
+    <link rel="stylesheet" href="/css/style.css"> <!-- if you have css -->
+</head>
+<body>
+<style>
+    /* style.css */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f0f4ff, #dfe9f3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: white;
+    padding: 40px 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+}
+
+.container h2 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.container p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #4a90e2;
+    outline: none;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4a90e2;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4a90e2;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #357ABD;
+}
+
+</style>
+    <div class="container">
+        <h2>Verify Your Email</h2>
+        <p>We've sent a 6-digit OTP to your email: <strong><%= email %></strong></p>
+         <% if (typeof error !== "undefined") { %>
+                            <div style="color: red;" class="alert alert-danger">
+                              <%= error %>
+                            </div>
+                          <% } %>
+        <form action="/verify-otp" method="POST">
+            <input type="hidden" name="email" value="<%= email %>">
+            <input type="text" name="otp" placeholder="Enter OTP" required maxlength="6">
+            <button type="submit">Verify OTP</button>
+          
+            <a style="text-decoration: none;margin-top:20px" href="/register" >Back</button>
+           
+        </form>
+    </div>
+</body>
+</html>

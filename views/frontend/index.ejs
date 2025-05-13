@@ -1,0 +1,1106 @@
+<%- include('../partials/frontend/header') %>
+<style>
+    /* Initially hide nice-select */
+.city-select .nice-select.form-control {
+display: none;
+}
+
+/* Show nice-select when state is selected */
+.city-select .nice-select.show {
+display: block;
+}
+
+/* Initially hide the default select dropdown */
+/* .city-select #city {
+display: none;
+} */
+
+</style>
+    <!-- navbar end -->
+    
+    <!-- banner start -->
+    <div class="banner-area banner-area-1 banner-area-bg" style="background: url(/frontend/img/banner/land-banner.jpg);">
+        <div class="container">
+            <div class="banner-area-inner">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="banner-inner text-center">
+                            <p>Finding the perfect plot has never been this easy before.</p>
+                            <div class="line"></div>
+                            <h2>Buy Land, Sell Land,</h2>
+                             <h2>All In One Place.</h2>
+
+                            <!-- <h2>The Easier way to buy or sell Land</h2> -->
+                        </div>
+                    </div>
+                    <div class="col-lg-8 mt-4">
+                        <!-- <form > -->
+                            <form class="main-search-inner" action="/properties" method="get">
+                            <div class="row custom-gutters-10">
+
+                                
+                                <div class="col-md-4">
+                                    <div class="single-select-inner">
+                                        <select class="form-control" id="state" name="state" onchange="updateCities()">
+                                            <option value="">Select State</option>
+                                            <option value="AndraPradesh">Andra Pradesh</option>
+                                            <option value="ArunachalPradesh">Arunachal Pradesh</option>
+                                            <option value="Assam">Assam</option>
+                                            <option value="Bihar">Bihar</option>
+                                            <option value="Chhattisgarh">Chhattisgarh</option>
+                                            <option value="Goa">Goa</option>
+                                            <option value="Gujarat">Gujarat</option>
+                                            <option value="Haryana">Haryana</option>
+                                            <option value="HimachalPradesh">HimachalPradesh</option>
+                                            <option value="JammuKashmir">JammuKashmir</option>
+                                            <option value="Jharkhand">Jharkhand</option>
+                                            <option value="Karnataka">Karnataka</option>
+                                            <option value="Kerala">Kerala</option>
+                                            <option value="MadhyaPradesh">MadhyaPradesh</option>
+                                            <option value="Maharashtra">Maharashtra</option>
+                                            <option value="Manipur">Manipur</option>
+                                            <option value="Meghalaya">Meghalaya</option>
+                                            <option value="Mizoram">Mizoram</option>
+                                            <option value="Nagaland">Nagaland</option>
+                                            <option value="Odisha">Odisha</option>
+                                            <option value="Punjab">Punjab</option>
+                                            <option value="Rajasthan">Rajasthan</option>
+                                            <option value="Sikkim">Sikkim</option>
+                                            <option value="TamilNadu">TamilNadu</option>
+                                            <option value="Telangana">Telangana</option>
+                                            <option value="Tripura">Tripura</option>
+
+                                            <option value="UttarPradesh">UttarPradesh</option>
+                                            <option value="Uttarakhand">Uttarakhand</option>
+                                            <option value="AndamanNicobar">AndamanNicobar</option>
+                                            <option value="Chandigarh">Chandigarh</option>
+                                            <option value="DadraHaveli">DadraHaveli</option>
+                                            <option value="DamanDiu">DamanDiu</option>
+                                            <option value="Delhi">Delhi</option>
+                                            <option value="Lakshadweep">Lakshadweep</option>
+                                            <option value="Puducherry">Puducherry</option>                 
+                                            <!-- Add more states here -->
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-4">
+                                    <div class="single-select-inner city-select">
+                                        <select class="form-control" id="city" name="city" style="display: block !important;">
+                                            <option value="">Select City</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            
+                                
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-base w-100" ><i class="fa fa-search mr-1"></i> Search</button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner end -->
+
+    <!-- service start -->
+    <div class="service-area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-10">
+                    <div class="single-service-wrap">
+                        <div class="thumb">
+                            <img src="/frontend/img/service/1.png" alt="icon">
+                        </div>
+                        <div class="single-service-details">
+                            <h4>Sell Your Land</h4>
+                            <p>List your land for free and connect with genuine buyers instantly.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-10">
+                    <div class="single-service-wrap">
+                        <div class="thumb">
+                            <img src="/frontend/img/service/2.png" alt="icon">
+                        </div>
+                        <div class="single-service-details">
+                            <h4>Recent Land Listings</h4>
+                            <p>Browse newly added plots in top locations across the city.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-10">
+                    <div class="single-service-wrap mb-0">
+                        <div class="thumb">
+                            <img src="/frontend/img/service/3.png" alt="icon">
+                        </div>
+                        <div class="single-service-details">
+                            <h4>Verified Land Deals</h4>
+                            <p>We’re offering the best land deals — post or explore today!.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- service end -->
+
+    <!-- product area start -->
+    <div class="product-area pd-top-118 pd-bottom-90">
+        <div class="container">
+            <div class="section-title text-center">
+                <!-- <h6>We are offering the best Deal</h6> -->
+                <h2>Trending Lands</h2>
+            </div>
+            <div class="row justify-content-center">
+                <% properties.forEach(property => { %>
+                    <div class="col-lg-4 col-md-6">
+                      
+
+                        <a href="/property-details/<%= property._id %>" > 
+                        <div class="single-product-wrap">
+                        <div class="thumb" >
+                                
+                           <% if (property.images && property.images.length > 0 && property.images[0]) { %>
+    <img src="/uploads/<%= property.images[0] %>" alt="img">
+<% } else { %>
+    <img src="/frontend/img/banner/1.jpg" alt="img">
+<% } %>
+
+<!-- <img src="<%= property.images && property.images.length > 0 ? '/uploads/' + property.images[0] : 'frontend/img/service/2.png' %>" alt="img"> -->
+
+                            <span class="cat">For Sell</span>
+                        </div>
+                        <div class="product-wrap-details">
+                            <div class="media">
+                                <div class="author">
+                                    <!-- <img src="/frontend/img/author/1.png" alt="img">                                     -->
+                                </div>
+                                <div class="media-body">
+                                
+                                    <p><img src="/frontend/img/icon/location-alt.png" alt="img"><%= property.state %> </p>
+                                </div>
+                                <!-- <span class="fav-btn float-right" href="#"><i class="far fa-heart"></i></span> -->
+                            </div>
+                            <div class="product-meta">
+                                <span class="price">$ <%= property.price %></span>
+                                <div class="float-right d-inline-block">
+                                    <ul>
+                                        <li><img src="/frontend/img/icon/triangle.png" alt="img"><%= property.area %> <%= property.areameasure %></li>
+   <li><img src="/frontend/img/icon/wall.png" alt="img"><%= property.city %> </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>          
+                    </div>
+                </a>    
+                </div>
+                <% }); %>
+                <!-- <div class="col-lg-4 col-md-6">
+                    <div class="single-product-wrap">
+                        <div class="thumb">
+                            <img src="/frontend/img/product/2.png" alt="img">
+                            <a class="cat" href="property-details.html">For Sell</a>
+                        </div>
+                        <div class="product-wrap-details">
+                            <div class="media">
+                                <div class="author">
+                                    <img src="/frontend/img/author/2.png" alt="img">                                    
+                                </div>
+                                <div class="media-body">
+                                    <h6><a href="#">Owner Name</a></h6>
+                                    <p><img src="/frontend/img/icon/location-alt.png" alt="img">New York real estate </p>
+                                </div>
+                                <a class="fav-btn float-right" href="#"><i class="far fa-heart"></i></a>
+                            </div>
+                            <div class="product-meta">
+                                <span class="price">$ 80,650.00</span>
+                                <div class="float-right d-inline-block">
+                                    <ul>
+                                        <li><img src="/frontend/img/icon/triangle.png" alt="img">2</li>
+                                        <li><img src="/frontend/img/icon/bed.png" alt="img">3</li>
+                                        <li><img src="/frontend/img/icon/wall.png" alt="img">1026 sq ft</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>          
+                    </div>
+                </div> -->
+                <!-- <div class="col-lg-4 col-md-6">
+                    <div class="single-product-wrap">
+                        <div class="thumb">
+                            <img src="/frontend/img/product/3.png" alt="img">
+                            <a class="cat" href="property-details.html">For Sell</a>
+                        </div>
+                        <div class="product-wrap-details">
+                            <div class="media">
+                                <div class="author">
+                                    <img src="/frontend/img/author/3.png" alt="img">                                    
+                                </div>
+                                <div class="media-body">
+                                    <h6><a href="#">Owner Name</a></h6>
+                                    <p><img src="/frontend/img/icon/location-alt.png" alt="img">New York real estate </p>
+                                </div>
+                                <a class="fav-btn float-right" href="#"><i class="far fa-heart"></i></a>
+                            </div>
+                            <div class="product-meta">
+                                <span class="price">$ 80,650.00</span>
+                                <div class="float-right d-inline-block">
+                                    <ul>
+                                        <li><img src="/frontend/img/icon/triangle.png" alt="img">2</li>
+                                        <li><img src="/frontend/img/icon/bed.png" alt="img">3</li>
+                                        <li><img src="/frontend/img/icon/wall.png" alt="img">1026 sq ft</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>          
+                    </div>
+                </div>      -->
+            </div>
+        </div>
+    </div>
+    <!-- product area end -->   
+
+    <!-- video area start -->
+ 
+<video class="responsive-video" controls autoplay muted>
+    <source src="/frontend/video/video-land.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+
+<style>
+    .responsive-video {
+    width: 100%;
+    height: auto;
+}
+.single-product-wrap .thumb img {
+  height: 287px;        /* or any fixed height you want */
+  width: 100%;          /* make sure it fills the container width */
+  object-fit: cover;    /* this ensures the image covers the area without distortion */
+  display: block;       /* removes default inline spacing */
+}
+
+</style>
+    <!-- video area end -->
+
+    <!-- product area start -->
+    <div class="product-area pd-top-118 pd-bottom-90">
+        <div class="container">
+            <div class="section-title text-center">
+                <!-- <h6>We are offring the best Categories for you</h6> -->
+                <h2>Discover Our Land Options</h2>
+            </div>
+            <div class="row">
+                <% Land.forEach(property => { %>
+                    <a href="/landtype/<%= property.land_type %>">
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-category-product-wrap">
+                        <div class="thumb">
+                                               <% if (property.image ) { %>
+    <img src="/uploads/<%= property.image %>" alt="img">
+<% } else { %>
+    <img src="/frontend/img/banner/1.jpg" alt="img">
+<% } %>
+                            <!-- <img src="/uploads/<%= property.image %>" alt="img"> -->
+                        </div>
+                        <div class="single-category-product-details">
+                            <h4><a href="/landtype/<%= property.land_type %>"><%= property.land_type %></a></h4>
+                            <!-- <a class="btn btn-base" href="property.html"><%= property.count %>Properties</a> -->
+                        </div>
+                    </div>
+                </div>
+                </a>
+                <% }); %>
+
+                <!-- <div class="col-lg-4 col-md-6">
+                    <div class="single-category-product-wrap">
+                        <div class="thumb">
+                            <img src="/frontend//img/product/cat-2.png" alt="img">
+                        </div>
+                        <div class="single-category-product-details">
+                            <h4><a href="property-details.html">Rose Cottage</a></h4>
+                            <a class="btn btn-base" href="property.html">6 Porparties</a>
+                        </div>
+                    </div>
+                </div>  -->
+                <!-- <div class="col-lg-4 col-md-6">
+                    <div class="single-category-product-wrap">
+                        <div class="thumb">
+                            <img src="/frontend/img/product/cat-3.png" alt="img">
+                        </div>
+                        <div class="single-category-product-details">
+                            <h4><a href="property-details.html">Ong Barn</a></h4>
+                            <a class="btn btn-base" href="property.html">2 Porparties</a>
+                        </div>
+                    </div>
+                </div>   
+                <div class="col-lg-4 col-md-6 order-lg-12">
+                    <div class="single-category-product-wrap">
+                        <div class="thumb">
+                            <img src="/frontend/img/product/cat-5.png" alt="img">
+                        </div>
+                        <div class="single-category-product-details">
+                            <h4><a href="property-details.html">Family House</a></h4>
+                            <a class="btn btn-base" href="property.html">1 Porparties</a>
+                        </div>
+                    </div>
+                </div> 
+                <div class="col-lg-8 order-lg-1">
+                    <div class="single-category-product-wrap">
+                        <div class="thumb">
+                            <img src="/frontend/img/product/cat-4.png" alt="img">
+                        </div>
+                        <div class="single-category-product-details">
+                            <h4><a href="property-details.html">Beach House</a></h4>
+                            <a class="btn btn-base" href="property.html">7 Porparties</a>
+                        </div>
+                    </div>
+                </div>    -->
+            </div>
+        </div>
+    </div>
+    <!-- product area end -->  
+
+    <!-- testimonial area start -->
+    <!-- <div class="testimonial-area pd-top-118 pd-bottom-120 bg-overlay" style="background: url(/frontend/img/bg/2.png);">
+        <div class="bg-overlay-wrap">
+            <div class="section-title style-white text-center">
+                <h6>Our Testomonial </h6>
+                <h2>What Client Say</h2>
+                <p>Lorem ipsum dolor  amet, consectetur adipisicing elit Lorem ipsum dolor sit amet, </p>
+            </div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="testimonial-slider-1 owl-carousel">
+                            <div class="item">
+                                <div class="single-testimonial-inner style-two text-center">
+                                    <div class="thumb main-thumb">
+                                        <img src="/frontend/img/testimonial/1.png" alt="img">
+                                    </div>
+                                    <div class="details">
+                                        <h6 class="name">Sarif Jaya Miprut</h6>
+                                        <p>“consecte Lorem ipsum dolor sit amet, Lorem ipsum dolor amet, consecte Lorem ipsum dolor sit adipisicing amet, consectetur sed do eiusmod tempor incididunt dolore magna consecrem adipisicing ipsum dolor sit amet, consectetur elit,’’ </p>
+                                        <div class="rating-inner">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="single-testimonial-inner style-two text-center">
+                                    <div class="thumb main-thumb">
+                                        <img src="/frontend/img/testimonial/4.png" alt="img">
+                                    </div>
+                                    <div class="details">
+                                        <h6 class="name">Sarif Jaya Miprut</h6>
+                                        <p>“consecte Lorem ipsum dolor sit amet, Lorem ipsum dolor amet, consecte Lorem ipsum dolor sit adipisicing amet, consectetur sed do eiusmod tempor incididunt dolore magna consecrem adipisicing ipsum dolor sit amet, consectetur elit,’’ </p>
+                                        <div class="rating-inner">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- testimonial area end -->
+
+    <!-- Propartes area start --> 
+    <div class="propartes-area pd-top-118 pd-bottom-90">
+        <div class="container">
+            <div class="section-title text-center">
+                <!-- <h6>New Properties</h6> -->
+                <h2>New Properties</h2>
+            </div>
+            <div class="mgd-tab-inner text-center" > 
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item"  id="sellSection">
+                        <a class="nav-link active"  href="#sellSection" >Buy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  href="/login" >Sell</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="rent1" role="tabpanel" aria-labelledby="rent1-tab">
+                    <div class="row">
+                <% property.forEach(property => { %>
+                        
+                        <div class="col-lg-4 col-md-6">
+                                                 <a href="/property-details/<%= property._id %>" > 
+
+                            <div class="single-product-wrap style-bottom">
+                                <div class="thumb">
+
+                                                    <% if (property.images && property.images.length > 0 && property.images[0]) { %>
+    <img src="/uploads/<%= property.images[0] %>" alt="img">
+<% } else { %>
+    <img src="/frontend/img/banner/1.jpg" alt="img">
+<% } %>
+                                    <!-- <img src="/uploads/<%= property.images[0] %>" alt="img">  -->
+                                    <div class="product-wrap-details">
+                                        <div class="media">
+                                           
+                                        </div>
+                                    </div> 
+                                </div> 
+                                <div class="product-details-inner">
+                                    <h4><a href="property-details.html"><%= property.title %></a></h4>
+                                    <ul class="meta-inner">
+                                        <li><img src="/frontend/img/icon/location2.png" alt="img"><%= property.state %> </li>
+                                        <li><a href="#">For Sell</a></li>
+                                    </ul>
+                                    <p><%=property.description %>.</p>
+                                </div>
+                                   
+                            </div>
+                            </a>
+                        </div>
+                <% }); %>
+
+                        <!-- <div class="col-lg-4 col-md-6">
+                            <div class="single-product-wrap style-bottom">
+                                <div class="thumb">
+                                    <img src="/frontend/img/project/2.png" alt="img">
+                                    <div class="product-wrap-details">
+                                        <div class="media">
+                                            <div class="author">
+                                                <img src="/frontend/img/author/2.png" alt="img">           
+                                            </div>
+                                            <div class="media-body">
+                                                <h6><a href="#">Owner Name</a></h6>
+                                                <p><img src="/frontend/img/icon/location-alt.png" alt="img">New York real estate </p>
+                                            </div>
+                                            <a class="fav-btn float-right" href="#"><i class="far fa-heart"></i></a>
+                                        </div>
+                                    </div> 
+                                </div> 
+                                <div class="product-details-inner">
+                                    <h4><a href="property-details.html">Gorgeous Villa</a></h4>
+                                    <ul class="meta-inner">
+                                        <li><img src="/frontend/img/icon/location2.png" alt="img">New York</li>
+                                        <li><a href="#">For Sell</a></li>
+                                    </ul>
+                                    <p>Lorem ipsum dolor consectetur iicing elit, sed do eius Lorem ipsum dolo amet, costur adipisicing eiusmod.</p>
+                                </div>
+                                <div class="product-meta-bottom">
+                                    <span class="price">$ 80,650.00</span>
+                                    <span>For sale</span>
+                                    <span>1 year ago</span>
+                                </div>         
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="single-product-wrap style-bottom">
+                                <div class="thumb">
+                                    <img src="/frontend/img/project/3.png" alt="img">
+                                    <div class="product-wrap-details">
+                                        <div class="media">
+                                            <div class="author">
+                                                <img src="/frontend/img/author/3.png" alt="img">           
+                                            </div>
+                                            <div class="media-body">
+                                                <h6><a href="#">Owner Name</a></h6>
+                                                <p><img src="/frontend/img/icon/location-alt.png" alt="img">New York real estate </p>
+                                            </div>
+                                            <a class="fav-btn float-right" href="#"><i class="far fa-heart"></i></a>
+                                        </div>
+                                    </div> 
+                                </div> 
+                                <div class="product-details-inner">
+                                    <h4><a href="property-details.html">Daily Property</a></h4>
+                                    <ul class="meta-inner">
+                                        <li><img src="/frontend/img/icon/location2.png" alt="img">New York</li>
+                                        <li><a href="#">For Sell</a></li>
+                                    </ul>
+                                    <p>Lorem ipsum dolor consectetur iicing elit, sed do eius Lorem ipsum dolo amet, costur adipisicing eiusmod.</p>
+                                </div>
+                                <div class="product-meta-bottom">
+                                    <span class="price">$ 80,650.00</span>
+                                    <span>For sale</span>
+                                    <span>1 year ago</span>
+                                </div>         
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="single-product-wrap style-bottom">
+                                <div class="thumb">
+                                    <img src="/frontend/img/project/4.png" alt="img">
+                                    <div class="product-wrap-details">
+                                        <div class="media">
+                                            <div class="author">
+                                                <img src="/frontend/img/author/4.png" alt="img">           
+                                            </div>
+                                            <div class="media-body">
+                                                <h6><a href="#">Owner Name</a></h6>
+                                                <p><img src="/frontend/img/icon/location-alt.png" alt="img">New York real estate </p>
+                                            </div>
+                                            <a class="fav-btn float-right" href="#"><i class="far fa-heart"></i></a>
+                                        </div>
+                                    </div> 
+                                </div> 
+                                <div class="product-details-inner">
+                                    <h4><a href="property-details.html">Farm House</a></h4>
+                                    <ul class="meta-inner">
+                                        <li><img src="/frontend/img/icon/location2.png" alt="img">New York</li>
+                                        <li><a href="#">For Sell</a></li>
+                                    </ul>
+                                    <p>Lorem ipsum dolor consectetur iicing elit, sed do eius Lorem ipsum dolo amet, costur adipisicing eiusmod.</p>
+                                </div>
+                                <div class="product-meta-bottom">
+                                    <span class="price">$ 80,650.00</span>
+                                    <span>For sale</span>
+                                    <span>1 year ago</span>
+                                </div>         
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="single-product-wrap style-bottom">
+                                <div class="thumb">
+                                    <img src="/frontend/img/project/5.png" alt="img">
+                                    <div class="product-wrap-details">
+                                        <div class="media">
+                                            <div class="author">
+                                                <img src="/frontend/img/author/5.png" alt="img">           
+                                            </div>
+                                            <div class="media-body">
+                                                <h6><a href="#">Owner Name</a></h6>
+                                                <p><img src="/frontend/img/icon/location-alt.png" alt="img">New York real estate </p>
+                                            </div>
+                                            <a class="fav-btn float-right" href="#"><i class="far fa-heart"></i></a>
+                                        </div>
+                                    </div> 
+                                </div> 
+                                <div class="product-details-inner">
+                                    <h4><a href="property-details.html">Beach Side House</a></h4>
+                                    <ul class="meta-inner">
+                                        <li><img src="/frontend/img/icon/location2.png" alt="img">New York</li>
+                                        <li><a href="#">For Sell</a></li>
+                                    </ul>
+                                    <p>Lorem ipsum dolor consectetur iicing elit, sed do eius Lorem ipsum dolo amet, costur adipisicing eiusmod.</p>
+                                </div>
+                                <div class="product-meta-bottom">
+                                    <span class="price">$ 80,650.00</span>
+                                    <span>For sale</span>
+                                    <span>1 year ago</span>
+                                </div>         
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="single-product-wrap style-bottom">
+                                <div class="thumb">
+                                    <img src="/frontend/img/project/6.png" alt="img">
+                                    <div class="product-wrap-details">
+                                        <div class="media">
+                                            <div class="author">
+                                                <img src="/frontend/img/author/6.png" alt="img">           
+                                            </div>
+                                            <div class="media-body">
+                                                <h6><a href="#">Owner Name</a></h6>
+                                                <p><img src="/frontend/img/icon/location-alt.png" alt="img">New York real estate </p>
+                                            </div>
+                                            <a class="fav-btn float-right" href="#"><i class="far fa-heart"></i></a>
+                                        </div>
+                                    </div> 
+                                </div> 
+                                <div class="product-details-inner">
+                                    <h4><a href="property-details.html">Gorgeous Hotel</a></h4>
+                                    <ul class="meta-inner">
+                                        <li><img src="/frontend/img/icon/location2.png" alt="img">New York</li>
+                                        <li><a href="#">For Sell</a></li>
+                                    </ul>
+                                    <p>Lorem ipsum dolor consectetur iicing elit, sed do eius Lorem ipsum dolo amet, costur adipisicing eiusmod.</p>
+                                </div>
+                                <div class="product-meta-bottom">
+                                    <span class="price">$ 80,650.00</span>
+                                    <span>For sale</span>
+                                    <span>1 year ago</span>
+                                </div>         
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+                <!-- <div class="tab-pane fade" id="sell1" role="tabpanel" aria-labelledby="sell1-tab">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="single-product-wrap style-bottom">
+                                <div class="thumb">
+                                    <img src="/frontend/img/project/4.png" alt="img">
+                                    <div class="product-wrap-details">
+                                        <div class="media">
+                                            <div class="author">
+                                                <img src="/frontend/img/author/4.png" alt="img">           
+                                            </div>
+                                            <div class="media-body">
+                                                <h6><a href="#">Owner Name</a></h6>
+                                                <p><img src="/frontend/img/icon/location-alt.png" alt="img">New York real estate </p>
+                                            </div>
+                                            <a class="fav-btn float-right" href="#"><i class="far fa-heart"></i></a>
+                                        </div>
+                                    </div> 
+                                </div> 
+                                <div class="product-details-inner">
+                                    <h4><a href="property-details.html">Farm House</a></h4>
+                                    <ul class="meta-inner">
+                                        <li><img src="/frontend/img/icon/location2.png" alt="img">New York</li>
+                                        <li><a href="#">For Sell</a></li>
+                                    </ul>
+                                    <p>Lorem ipsum dolor consectetur iicing elit, sed do eius Lorem ipsum dolo amet, costur adipisicing eiusmod.</p>
+                                </div>
+                                <div class="product-meta-bottom">
+                                    <span class="price">$ 80,650.00</span>
+                                    <span>For sale</span>
+                                    <span>1 year ago</span>
+                                </div>         
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="single-product-wrap style-bottom">
+                                <div class="thumb">
+                                    <img src="/frontend/img/project/5.png" alt="img">
+                                    <div class="product-wrap-details">
+                                        <div class="media">
+                                            <div class="author">
+                                                <img src="/frontend/img/author/5.png" alt="img">           
+                                            </div>
+                                            <div class="media-body">
+                                                <h6><a href="#">Owner Name</a></h6>
+                                                <p><img src="/frontend/img/icon/location-alt.png" alt="img">New York real estate </p>
+                                            </div>
+                                            <a class="fav-btn float-right" href="#"><i class="far fa-heart"></i></a>
+                                        </div>
+                                    </div> 
+                                </div> 
+                                <div class="product-details-inner">
+                                    <h4><a href="property-details.html">Beach Side House</a></h4>
+                                    <ul class="meta-inner">
+                                        <li><img src="/frontend/img/icon/location2.png" alt="img">New York</li>
+                                        <li><a href="#">For Sell</a></li>
+                                    </ul>
+                                    <p>Lorem ipsum dolor consectetur iicing elit, sed do eius Lorem ipsum dolo amet, costur adipisicing eiusmod.</p>
+                                </div>
+                                <div class="product-meta-bottom">
+                                    <span class="price">$ 80,650.00</span>
+                                    <span>For sale</span>
+                                    <span>1 year ago</span>
+                                </div>         
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="single-product-wrap style-bottom">
+                                <div class="thumb">
+                                    <img src="/frontend/img/project/6.png" alt="img">
+                                    <div class="product-wrap-details">
+                                        <div class="media">
+                                            <div class="author">
+                                                <img src="/frontend/img/author/6.png" alt="img">           
+                                            </div>
+                                            <div class="media-body">
+                                                <h6><a href="#">Owner Name</a></h6>
+                                                <p><img src="/frontend/img/icon/location-alt.png" alt="img">New York real estate </p>
+                                            </div>
+                                            <a class="fav-btn float-right" href="#"><i class="far fa-heart"></i></a>
+                                        </div>
+                                    </div> 
+                                </div> 
+                                <div class="product-details-inner">
+                                    <h4><a href="property-details.html">Gorgeous Hotel</a></h4>
+                                    <ul class="meta-inner">
+                                        <li><img src="/frontend/img/icon/location2.png" alt="img">New York</li>
+                                        <li><a href="#">For Sell</a></li>
+                                    </ul>
+                                    <p>Lorem ipsum dolor consectetur iicing elit, sed do eius Lorem ipsum dolo amet, costur adipisicing eiusmod.</p>
+                                </div>
+                                <div class="product-meta-bottom">
+                                    <span class="price">$ 80,650.00</span>
+                                    <span>For sale</span>
+                                    <span>1 year ago</span>
+                                </div>         
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="single-product-wrap style-bottom">
+                                <div class="thumb">
+                                    <img src="/frontend/img/project/1.png" alt="img">
+                                    <div class="product-wrap-details">
+                                        <div class="media">
+                                            <div class="author">
+                                                <img src="/frontend/img/author/1.png" alt="img">           
+                                            </div>
+                                            <div class="media-body">
+                                                <h6><a href="#">Owner Name</a></h6>
+                                                <p><img src="/frontend/img/icon/location-alt.png" alt="img">New York real estate </p>
+                                            </div>
+                                            <a class="fav-btn float-right" href="#"><i class="far fa-heart"></i></a>
+                                        </div>
+                                    </div> 
+                                </div> 
+                                <div class="product-details-inner">
+                                    <h4><a href="property-details.html">Daily Apartment</a></h4>
+                                    <ul class="meta-inner">
+                                        <li><img src="/frontend/img/icon/location2.png" alt="img">New York</li>
+                                        <li><a href="#">For Sell</a></li>
+                                    </ul>
+                                    <p>Lorem ipsum dolor consectetur iicing elit, sed do eius Lorem ipsum dolo amet, costur adipisicing eiusmod.</p>
+                                </div>
+                                <div class="product-meta-bottom">
+                                    <span class="price">$ 80,650.00</span>
+                                    <span>For sale</span>
+                                    <span>1 year ago</span>
+                                </div>         
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="single-product-wrap style-bottom">
+                                <div class="thumb">
+                                    <img src="/frontend/img/project/2.png" alt="img">
+                                    <div class="product-wrap-details">
+                                        <div class="media">
+                                            <div class="author">
+                                                <img src="/frontend/img/author/2.png" alt="img">           
+                                            </div>
+                                            <div class="media-body">
+                                                <h6><a href="#">Owner Name</a></h6>
+                                                <p><img src="/frontend/img/icon/location-alt.png" alt="img">New York real estate </p>
+                                            </div>
+                                            <a class="fav-btn float-right" href="#"><i class="far fa-heart"></i></a>
+                                        </div>
+                                    </div> 
+                                </div> 
+                                <div class="product-details-inner">
+                                    <h4><a href="property-details.html">Gorgeous Villa</a></h4>
+                                    <ul class="meta-inner">
+                                        <li><img src="/frontend/img/icon/location2.png" alt="img">New York</li>
+                                        <li><a href="#">For Sell</a></li>
+                                    </ul>
+                                    <p>Lorem ipsum dolor consectetur iicing elit, sed do eius Lorem ipsum dolo amet, costur adipisicing eiusmod.</p>
+                                </div>
+                                <div class="product-meta-bottom">
+                                    <span class="price">$ 80,650.00</span>
+                                    <span>For sale</span>
+                                    <span>1 year ago</span>
+                                </div>         
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="single-product-wrap style-bottom">
+                                <div class="thumb">
+                                    <img src="/frontend/img/project/3.png" alt="img">
+                                    <div class="product-wrap-details">
+                                        <div class="media">
+                                            <div class="author">
+                                                <img src="/frontend/img/author/3.png" alt="img">           
+                                            </div>
+                                            <div class="media-body">
+                                                <h6><a href="#">Owner Name</a></h6>
+                                                <p><img src="/frontend/img/icon/location-alt.png" alt="img">New York real estate </p>
+                                            </div>
+                                            <a class="fav-btn float-right" href="#"><i class="far fa-heart"></i></a>
+                                        </div>
+                                    </div> 
+                                </div> 
+                                <div class="product-details-inner">
+                                    <h4><a href="property-details.html">Daily Property</a></h4>
+                                    <ul class="meta-inner">
+                                        <li><img src="/frontend/img/icon/location2.png" alt="img">New York</li>
+                                        <li><a href="#">For Sell</a></li>
+                                    </ul>
+                                    <p>Lorem ipsum dolor consectetur iicing elit, sed do eius Lorem ipsum dolo amet, costur adipisicing eiusmod.</p>
+                                </div>
+                                <div class="product-meta-bottom">
+                                    <span class="price">$ 80,650.00</span>
+                                    <span>For sale</span>
+                                    <span>1 year ago</span>
+                                </div>         
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <!-- Propartes area end -->
+
+    <!-- call-to-action area start -->
+    <!-- <div class="cta-area bg-overlay pd-top-118 pd-bottom-120 text-center" style="background: url(/frontend/img/other/1.png);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-8 col-lg-10">
+                    <div class="section-title style-white mb-0">
+                        <h6>Buy Or Sell</h6>
+                        <h2>Submit Property</h2>
+                        <p>consecte Lorem ipsum dolor sit amet, Lorem ipsum dolor  amet, consecte Lorem ipsum dolor sit adipisicing amet, consectetur  sed do eiusmod tempor incididunt dolore magna consecrem adipisicing ipsum dolor sit amet, consectetur elit,</p>
+                    </div>
+                    <div class="btn-wrap mt-4 pt-3">
+                        <a class="btn btn-base mr-2" href="add-property.html">SUBMIT</a>
+                        <a class="btn btn-base ml-2" href="property-details.html">BUY NOW</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- call-to-action area end -->
+
+    <!-- agent area start -->
+    <!-- <div class="agent-area text-center pd-top-118 pd-bottom-90">
+        <div class="container">
+            <div class="section-title text-center">
+                <h6>Meet Our Agent</h6>
+                <h2>Our Best Agent</h2>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-agent-wrap">
+                        <div class="thumb">
+                            <img src="/frontend/img/agent/1.png" alt="img">
+                        </div> 
+                        <div class="details">
+                            <h4>Sandara Mrikon</h4>
+                            <h6>Estate Agent</h6>
+                            <ul class="social-area style-2">
+                                <li><a href="#"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>        
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-agent-wrap">
+                        <div class="thumb">
+                            <img src="/frontend/img/agent/2.png" alt="img">
+                        </div> 
+                        <div class="details">
+                            <h4>Sarif Jaya Miprut</h4>
+                            <h6>Area Agent</h6>
+                            <ul class="social-area style-2">
+                                <li><a href="#"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>        
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-agent-wrap">
+                        <div class="thumb">
+                            <img src="/frontend/img/agent/3.png" alt="img">
+                        </div> 
+                        <div class="details">
+                            <h4>Jordan Smith</h4>
+                            <h6>Expart Agent</h6>
+                            <ul class="social-area style-2">
+                                <li><a href="#"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- agent area end -->
+
+    <!-- client area start -->
+    <!-- <div class="client-area client-area-pd bg-overlay pd-top-118" style="background: url(/frontend/img/other/1.png);">
+        <div class="container">
+            <div class="row justify-content-center text-lg-left text-center">
+                <div class="col-lg-9">
+                    <div class="section-title style-white mb-0">
+                        <h6>Buy Or Sell</h6>
+                        <h2>Find Best Place For Leaving</h2>
+                        <p>Lorem ipsum dolor  amet, consecteLorem ipsum dolor sit amet, consectetur adipisicing sed do eiusmod tempor incididunt dolore magna consecteLorem ipsum dolor sit amet, consectetur adipisicing elit,</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 align-self-end text-lg-right mt-4 mt-lg-0">
+                    <a class="btn btn-base" href="#">SUBMIT</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="client-slider bg-main style-two owl-carousel">
+            <div class="item">
+                <div class="thumb">
+                    <img src="/frontend/img/client/2.png" alt="img">
+                </div>
+            </div>
+            <div class="item">
+                <div class="thumb">
+                    <img src="/frontend/img/client/3.png" alt="img">
+                </div>
+            </div>
+            <div class="item">
+                <div class="thumb">
+                    <img src="/frontend/img/client/4.png" alt="img">
+                </div>
+            </div>
+            <div class="item">
+                <div class="thumb">
+                    <img src="/frontend/img/client/5.png" alt="img">
+                </div>
+            </div>
+            <div class="item">
+                <div class="thumb">
+                    <img src="/frontend/img/client/2.png" alt="img">
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- client area end -->
+
+    <!-- blog area start -->
+    <!-- <div class="blog-area pd-top-118 pd-bottom-90">
+        <div class="container">
+            <div class="section-title text-center">
+                <h6>Blog & News</h6>
+                <h2>News Feads</h2>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-product-wrap style-bottom-radius">
+                        <div class="thumb">
+                            <img src="/frontend/img/project/10.png" alt="img">
+                        </div> 
+                        <div class="product-details-inner">
+                            <ul class="meta-inner">
+                                <li><i class="fa fa-user"></i>By Admin</li>
+                                <li><i class="fa fa-calendar-alt"></i>Marce 9 , 2020</li>
+                            </ul>
+                            <h4><a href="blog-details.html">Family House</a></h4>
+                            <p>House ipsum dolor  consectetur adipisicing elit, sed do eius Lorem ipsum dolo ame conse.</p>
+                            <a class="btn btn-base read-more" href="#"><i class="la la-arrow-right"></i></a>
+                        </div>        
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-product-wrap style-bottom-radius">
+                        <div class="thumb">
+                            <img src="/frontend/img/project/11.png" alt="img">
+                        </div> 
+                        <div class="product-details-inner">
+                            <ul class="meta-inner">
+                                <li><i class="fa fa-user"></i>By Admin</li>
+                                <li><i class="fa fa-calendar-alt"></i>Marce 9 , 2020</li>
+                            </ul>
+                            <h4><a href="blog-details.html">Daily Apartment</a></h4>
+                            <p>Daily ipsum dolor  consectetur adipisicing elit, sed do eius Lorem ipsum dolo ame conse.</p>
+                            <a class="btn btn-base read-more" href="#"><i class="la la-arrow-right"></i></a>
+                        </div>        
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-product-wrap style-bottom-radius">
+                        <div class="thumb">
+                            <img src="/frontend/img/project/12.png" alt="img">
+                        </div> 
+                        <div class="product-details-inner">
+                            <ul class="meta-inner">
+                                <li><i class="fa fa-user"></i>By Admin</li>
+                                <li><i class="fa fa-calendar-alt"></i>Marce 9 , 2020</li>
+                            </ul>
+                            <h4><a href="blog-details.html">Hotel Resort</a></h4>
+                            <p>Resort ipsum dolor  consectetur adipisicing elit, sed do eius Lorem ipsum dolo ame conse.</p>
+                            <a class="btn btn-base read-more" href="#"><i class="la la-arrow-right"></i></a>
+                        </div>        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- Blog area end -->  
+    <%- include('../partials/frontend/footer') %>
+<script>
+ // State to cities mapping
+var states = {
+    // "AndraPradesh": ["Anantapur", "Chittoor", "East Godavari", "Guntur", "Kadapa"],
+    "AndraPradesh" : ["Anantapur","Chittoor","East Godavari","Guntur","Kadapa","Krishna","Kurnool","Prakasam","Nellore","Srikakulam","Visakhapatnam","Vizianagaram","West Godavari"],
+  "ArunachalPradesh" : ["Anjaw","Changlang","Dibang Valley","East Kameng","East Siang","Kra Daadi","Kurung Kumey","Lohit","Longding","Lower Dibang Valley","Lower Subansiri","Namsai","Papum Pare","Siang","Tawang","Tirap","Upper Siang","Upper Subansiri","West Kameng","West Siang","Itanagar"],
+ "Assam" : ["Baksa","Barpeta","Biswanath","Bongaigaon","Cachar","Charaideo","Chirang","Darrang","Dhemaji","Dhubri","Dibrugarh","Goalpara","Golaghat","Hailakandi","Hojai","Jorhat","Kamrup Metropolitan","Kamrup (Rural)","Karbi Anglong","Karimganj","Kokrajhar","Lakhimpur","Majuli","Morigaon","Nagaon","Nalbari","Dima Hasao","Sivasagar","Sonitpur","South Salmara Mankachar","Tinsukia","Udalguri","West Karbi Anglong"],
+ "Bihar" :  ["Araria","Arwal","Aurangabad","Banka","Begusarai","Bhagalpur","Bhojpur","Buxar","Darbhanga","East Champaran","Gaya","Gopalganj","Jamui","Jehanabad","Kaimur","Katihar","Khagaria","Kishanganj","Lakhisarai","Madhepura","Madhubani","Munger","Muzaffarpur","Nalanda","Nawada","Patna","Purnia","Rohtas","Saharsa","Samastipur","Saran","Sheikhpura","Sheohar","Sitamarhi","Siwan","Supaul","Vaishali","West Champaran"],
+ "Chhattisgarh" : ["Balod","Baloda Bazar","Balrampur","Bastar","Bemetara","Bijapur","Bilaspur","Dantewada","Dhamtari","Durg","Gariaband","Janjgir Champa","Jashpur","Kabirdham","Kanker","Kondagaon","Korba","Koriya","Mahasamund","Mungeli","Narayanpur","Raigarh","Raipur","Rajnandgaon","Sukma","Surajpur","Surguja"],
+"Goa" : ["North Goa","South Goa"],
+ "Gujarat" : ["Ahmedabad","Amreli","Anand","Aravalli","Banaskantha","Bharuch","Bhavnagar","Botad","Chhota Udaipur","Dahod","Dang","Devbhoomi Dwarka","Gandhinagar","Gir Somnath","Jamnagar","Junagadh","Kheda","Kutch","Mahisagar","Mehsana","Morbi","Narmada","Navsari","Panchmahal","Patan","Porbandar","Rajkot","Sabarkantha","Surat","Surendranagar","Tapi","Vadodara","Valsad"],
+ "Haryana" : ["Ambala","Bhiwani","Charkhi Dadri","Faridabad","Fatehabad","Gurugram","Hisar","Jhajjar","Jind","Kaithal","Karnal","Kurukshetra","Mahendragarh","Mewat","Palwal","Panchkula","Panipat","Rewari","Rohtak","Sirsa","Sonipat","Yamunanagar"],
+"HimachalPradesh" : ["Bilaspur","Chamba","Hamirpur","Kangra","Kinnaur","Kullu","Lahaul Spiti","Mandi","Shimla","Sirmaur","Solan","Una"],
+"JammuKashmir" : ["Anantnag","Bandipora","Baramulla","Budgam","Doda","Ganderbal","Jammu","Kargil","Kathua","Kishtwar","Kulgam","Kupwara","Leh","Poonch","Pulwama","Rajouri","Ramban","Reasi","Samba","Shopian","Srinagar","Udhampur"],
+ "Jharkhand" : ["Bokaro","Chatra","Deoghar","Dhanbad","Dumka","East Singhbhum","Garhwa","Giridih","Godda","Gumla","Hazaribagh","Jamtara","Khunti","Koderma","Latehar","Lohardaga","Pakur","Palamu","Ramgarh","Ranchi","Sahebganj","Seraikela Kharsawan","Simdega","West Singhbhum"],
+ "Karnataka" : ["Bagalkot","Bangalore Rural","Bangalore Urban","Belgaum","Bellary","Bidar","Vijayapura","Chamarajanagar","Chikkaballapur","Chikkamagaluru","Chitradurga","Dakshina Kannada","Davanagere","Dharwad","Gadag","Gulbarga","Hassan","Haveri","Kodagu","Kolar","Koppal","Mandya","Mysore","Raichur","Ramanagara","Shimoga","Tumkur","Udupi","Uttara Kannada","Yadgir"],
+ "Kerala" : ["Alappuzha","Ernakulam","Idukki","Kannur","Kasaragod","Kollam","Kottayam","Kozhikode","Malappuram","Palakkad","Pathanamthitta","Thiruvananthapuram","Thrissur","Wayanad"],
+ "MadhyaPradesh" : ["Agar Malwa","Alirajpur","Anuppur","Ashoknagar","Balaghat","Barwani","Betul","Bhind","Bhopal","Burhanpur","Chhatarpur","Chhindwara","Damoh","Datia","Dewas","Dhar","Dindori","Guna","Gwalior","Harda","Hoshangabad","Indore","Jabalpur","Jhabua","Katni","Khandwa","Khargone","Mandla","Mandsaur","Morena","Narsinghpur","Neemuch","Panna","Raisen","Rajgarh","Ratlam","Rewa","Sagar","Satna",
+"Sehore","Seoni","Shahdol","Shajapur","Sheopur","Shivpuri","Sidhi","Singrauli","Tikamgarh","Ujjain","Umaria","Vidisha"],
+ "Maharashtra" : ["Ahmednagar","Akola","Amravati","Aurangabad","Beed","Bhandara","Buldhana","Chandrapur","Dhule","Gadchiroli","Gondia","Hingoli","Jalgaon","Jalna","Kolhapur","Latur","Mumbai City","Mumbai Suburban","Nagpur","Nanded","Nandurbar","Nashik","Osmanabad","Palghar","Parbhani","Pune","Raigad","Ratnagiri","Sangli","Satara","Sindhudurg","Solapur","Thane","Wardha","Washim","Yavatmal"],
+"Manipur" : ["Bishnupur","Chandel","Churachandpur","Imphal East","Imphal West","Jiribam","Kakching","Kamjong","Kangpokpi","Noney","Pherzawl","Senapati","Tamenglong","Tengnoupal","Thoubal","Ukhrul"],
+"Meghalaya" : ["East Garo Hills","East Jaintia Hills","East Khasi Hills","North Garo Hills","Ri Bhoi","South Garo Hills","South West Garo Hills","South West Khasi Hills","West Garo Hills","West Jaintia Hills","West Khasi Hills"],
+"Mizoram" : ["Aizawl","Champhai","Kolasib","Lawngtlai","Lunglei","Mamit","Saiha","Serchhip","Aizawl","Champhai","Kolasib","Lawngtlai","Lunglei","Mamit","Saiha","Serchhip"],
+"Nagaland" : ["Dimapur","Kiphire","Kohima","Longleng","Mokokchung","Mon","Peren","Phek","Tuensang","Wokha","Zunheboto"],
+"Odisha" :["Angul","Balangir","Balasore","Bargarh","Bhadrak","Boudh","Cuttack","Debagarh","Dhenkanal","Gajapati","Ganjam","Jagatsinghpur","Jajpur","Jharsuguda","Kalahandi","Kandhamal","Kendrapara","Kendujhar","Khordha","Koraput","Malkangiri","Mayurbhanj","Nabarangpur","Nayagarh","Nuapada","Puri","Rayagada","Sambalpur","Subarnapur","Sundergarh"],
+"Punjab": ["Amritsar","Barnala","Bathinda","Faridkot","Fatehgarh Sahib","Fazilka","Firozpur","Gurdaspur","Hoshiarpur","Jalandhar","Kapurthala","Ludhiana","Mansa","Moga","Mohali","Muktsar","Pathankot","Patiala","Rupnagar","Sangrur","Shaheed Bhagat Singh Nagar","Tarn Taran"],
+"Rajasthan" :  ["Ajmer","Alwar","Banswara","Baran","Barmer","Bharatpur","Bhilwara","Bikaner","Bundi","Chittorgarh","Churu","Dausa","Dholpur","Dungarpur","Ganganagar","Hanumangarh","Jaipur","Jaisalmer","Jalore","Jhalawar","Jhunjhunu","Jodhpur","Karauli","Kota","Nagaur","Pali","Pratapgarh","Rajsamand","Sawai Madhopur","Sikar","Sirohi","Tonk","Udaipur"],
+"Sikkim" :  ["East Sikkim","North Sikkim","South Sikkim","West Sikkim"],
+"TamilNadu" :  ["Ariyalur","Chennai","Coimbatore","Cuddalore","Dharmapuri","Dindigul","Erode","Kanchipuram","Kanyakumari","Karur","Krishnagiri","Madurai","Nagapattinam","Namakkal","Nilgiris","Perambalur","Pudukkottai","Ramanathapuram","Salem","Sivaganga","Thanjavur","Theni","Thoothukudi","Tiruchirappalli","Tirunelveli","Tiruppur","Tiruvallur","Tiruvannamalai","Tiruvarur","Vellore","Viluppuram","Virudhunagar"],
+"Telangana" :  ["Adilabad","Bhadradri Kothagudem","Hyderabad","Jagtial","Jangaon","Jayashankar","Jogulamba","Kamareddy","Karimnagar","Khammam","Komaram Bheem","Mahabubabad","Mahbubnagar","Mancherial","Medak","Medchal","Nagarkurnool","Nalgonda","Nirmal","Nizamabad","Peddapalli","Rajanna Sircilla","Ranga Reddy","Sangareddy","Siddipet","Suryapet","Vikarabad","Wanaparthy","Warangal Rural","Warangal Urban","Yadadri Bhuvanagiri"],
+"Tripura" : ["Dhalai","Gomati","Khowai","North Tripura","Sepahijala","South Tripura","Unakoti","West Tripura"],
+"UttarPradesh" : ["Agra","Aligarh","Allahabad","Ambedkar Nagar","Amethi","Amroha","Auraiya","Azamgarh","Baghpat","Bahraich","Ballia","Balrampur","Banda","Barabanki","Bareilly","Basti","Bhadohi","Bijnor","Budaun","Bulandshahr","Chandauli","Chitrakoot","Deoria","Etah","Etawah","Faizabad","Farrukhabad","Fatehpur","Firozabad","Gautam Buddha Nagar","Ghaziabad","Ghazipur","Gonda","Gorakhpur","Hamirpur","Hapur","Hardoi","Hathras","Jalaun","Jaunpur","Jhansi","Kannauj","Kanpur Dehat","Kanpur Nagar","Kasganj","Kaushambi","Kheri","Kushinagar","Lalitpur","Lucknow","Maharajganj","Mahoba","Mainpuri","Mathura","Mau","Meerut","Mirzapur","Moradabad","Muzaffarnagar","Pilibhit","Pratapgarh","Raebareli","Rampur","Saharanpur","Sambhal","Sant Kabir Nagar","Shahjahanpur","Shamli","Shravasti","Siddharthnagar","Sitapur","Sonbhadra","Sultanpur","Unnao","Varanasi"],
+"Uttarakhand" :  ["Almora","Bageshwar","Chamoli","Champawat","Dehradun","Haridwar","Nainital","Pauri","Pithoragarh","Rudraprayag","Tehri","Udham Singh Nagar","Uttarkashi"],
+"WestBengal":  ["Alipurduar","Bankura","Birbhum","Cooch Behar","Dakshin Dinajpur","Darjeeling","Hooghly","Howrah","Jalpaiguri","Jhargram","Kalimpong","Kolkata","Malda","Murshidabad","Nadia","North 24 Parganas","Paschim Bardhaman","Paschim Medinipur","Purba Bardhaman","Purba Medinipur","Purulia","South 24 Parganas","Uttar Dinajpur"],
+"AndamanNicobar": ["Nicobar","North Middle Andaman","South Andaman"],
+"Chandigarh" : ["Chandigarh"],
+"DadraHaveli" :  ["Dadra Nagar Haveli"],
+"DamanDiu" :  ["Daman","Diu"],
+"Delhi": ["Central Delhi","East Delhi","New Delhi","North Delhi","North East Delhi","North West Delhi","Shahdara","South Delhi","South East Delhi","South West Delhi","West Delhi"],
+"Lakshadweep" : ["Lakshadweep"],
+"Puducherry" : ["Karaikal","Mahe","Puducherry","Yanam"],
+};
+
+// Function to update cities dropdown based on selected state
+function updateCities() {
+    var state = document.getElementById("state").value;
+    var cityDropdown = document.getElementById("city");
+
+    // Clear existing options
+    cityDropdown.innerHTML = "<option value=''>Select City</option>";
+
+    // Show the city dropdown if a state is selected
+    if (state) {
+        cityDropdown.style.display = "block"; // Show the city dropdown
+
+        // Get the cities for the selected state
+        var cities = states[state];
+
+        // Populate cities for the selected state
+        cities.forEach(function(city) {
+            var option = document.createElement("option");
+            option.value = city;
+            option.text = city;
+            cityDropdown.appendChild(option);
+        });
+    } else {
+        // Hide the city dropdown if no state is selected
+        cityDropdown.style.display = "none";
+    }
+}
+
+    </script>

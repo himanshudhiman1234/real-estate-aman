@@ -1,0 +1,191 @@
+<%- include('../../partials/admin/navbar') %>
+<style>
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+    
+    .switch input { 
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+    
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
+    
+    input:focus + .slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+    
+    input:checked + .slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+    
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 34px;
+    }
+    
+    .slider.round:before {
+      border-radius: 50%;
+    }
+    .addproperty {
+    margin-top: 19px;
+   
+}
+    </style>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <!-- <h1 class="h3 mb-2 text-gray-800">Show property</   h1> -->
+                    <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+                        For more information about DataTables, please visit the <a target="_blank"
+                            href="https://datatables.net">official DataTables documentation</a>.</p> -->
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">List Property</h6>
+                            <div class="addproperty">
+
+                                <a href="/admin/create-properties" class="btn-primary mt-5" style="padding:10px; text-decoration: none;">Add property</a>
+                            </div>
+                            
+                        </div>
+                                              <% if (success_msg && success_msg.length > 0) { %>
+  <div class="alert alert-success m-3"><%= success_msg[0] %></div>
+<% } %>
+
+<% if (error_msg && error_msg.length > 0) { %>
+  <div class="alert alert-danger m-3"><%= error_msg[0] %></div>
+<% } %>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Property Title</th>
+                                            <th>Image</th>
+                                            <th>Location</th>
+                                            <th>Land Type</th>
+                                            <th>Status</th>
+                                            <th>Edit </th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Property Title</th>
+                                            <th>Image</th>
+                                            <th>Location</th>
+                                            <th>Land Type</th>
+                                            <th>Status</th>
+                                            <th>Edit </th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        
+                                        <% property.forEach(property => { %>
+                                            <tr>
+                                                <td><%= property.title %></td>
+                                             
+                                                    <td>
+                                                        <% if (property.images && property.images.length > 0) { %>
+                                                            <img src="/uploads/<%= property.images[0] %>" alt="image" width="100">
+                                                        <% } else { %>
+                                                            No image
+                                                        <% } %>
+                                                    </td>
+                                             
+                                                    <td><%= property.city %></td>
+                                                    <td><%= property.LandType %></td>
+                                                <td><label class="switch">
+                                                    <input type="checkbox" class="status-toggle" data-id="<%= property._id %>" <% if (property.status == 1) { %>checked<% } %> >
+
+                                                    <span class="slider round"></span>
+                                                  </label></td>
+                                                <td><a href="/admin/edit-property/<%= property._id %>">Edit</a></td>
+                                                <td> <form method="POST" action="/admin/property-delete/<%= property._id %>">
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </form></td>
+                                            </tr>
+                                            <% }); %>
+                                            
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+<script>
+    document.querySelectorAll(".status-toggle").forEach(toggle=>{
+        toggle.addEventListener('change',function(){
+            const PropertyId = this.dataset.id;
+            const newStatus = this.checked ? "1" : "0";
+
+            fetch(`/admin/update-property-status/${PropertyId}`,{
+                method:"PUT",
+                headers:{
+                    'Content-Type': 'application/json'
+
+                },
+                body:JSON.stringify({status:newStatus})
+            })
+            .then(res => res.json())
+            .then(data=>{
+                if(data.success){
+                    console.log("Status updated successfully")
+                }else{
+                    console.log("Failed to updated successfully")
+
+                }
+            })
+            .catch(err=>{
+                console.log(error)
+            })
+
+        })
+    });
+
+</script>
+<%- include('../../partials/admin/footer') %>
+     

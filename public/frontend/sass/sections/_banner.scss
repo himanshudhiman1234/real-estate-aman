@@ -1,0 +1,180 @@
+/*----------------------------------------------
+    ## Banner
+----------------------------------------------*/
+.banner-area {
+	display: flex;
+    align-items: center;
+	position: relative;
+}
+.banner-area-bg {
+    background-size: cover !important;
+    background-position: center !important;
+	&:after {
+		content: '';
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		left: 0;
+		top: 0;
+	  	background: rgba(0, 24, 77, 0.8);
+	}
+}
+.banner-area-inner {
+    padding-top: 60px;
+    position: relative;
+    z-index: 2;
+}
+.banner-inner {
+	p {
+		color: #fff;
+		margin-bottom: 20px;
+	}
+	.line {
+		background: #fff;
+	    height: 8px;
+	    width: 8px;
+	    margin: 0 auto;
+	    border-radius: 50%;
+	    position: relative;
+	    margin-bottom: 10px;
+	    &:before {
+	    	content: '';
+			position: absolute;
+			height: 2px;
+			width: 50px;
+			left: -55px;
+			top: 3px;
+		  	background: #fff;
+	    }
+	    &:after {
+	    	content: '';
+			position: absolute;
+			height: 2px;
+			width: 50px;
+			right: -55px;
+			top: 3px;
+		  	background: #fff;
+	    }
+	}
+	h2 {
+		font-size: 60px;
+		color: #fff;
+		font-weight: 700;
+	}
+}
+
+.banner-area-1 {
+	padding: 285px 0;
+}
+.banner-area-2 {
+	height: 100vh;
+	.banner-area-inner {
+		padding-top: 0;
+	}
+	.main-search-area {
+		position: absolute;
+		bottom: 0;
+	    width: 100%;
+	    background: #f3f3f3;
+	}
+	.main-search-inner {
+		padding: 30px;
+		.single-select-inner .nice-select,
+		.single-input-inner input,
+		.btn {
+			border-radius: 0 !important;
+		}
+		.single-select-inner {
+			&:after {
+				content: '';
+				position: absolute;
+				height: 100%;
+				width: 1px;
+				left: 0;
+				top: 0;
+			  	background: #f0f0f0;
+			}
+		}
+	}
+}
+.banner-area-3 {
+	position: relative;
+	.main-search-area{
+		position: absolute;
+		top: 90px;
+	    width: 100%;
+	}
+	.main-search-inner {
+		background: var(--main-color);
+		padding: 30px;
+	}
+	.banner-meta-inner {
+		background: var(--main-color);
+		display: inline-block;
+		position: absolute;
+		left: 20px;
+		z-index: 4;
+	    bottom: 0;
+	    padding: 18px 70px 17px 20px;
+	    h4 {
+	    	color: #fff;
+	    	margin-bottom: 5px;
+	    }
+	    span {
+	    	color: #fff;
+	    	font-size: 14px;
+	    }
+		img,
+		i {
+			width: auto;
+			display: inline-block;
+			margin-right: 6px;
+		}
+		.btn {
+		    position: absolute;
+		    top: 50%;
+		    right: -110px;
+		    margin-top: -23px;
+		}
+	}
+}
+.banner-slider {
+	.item {
+	    align-items: center;
+	    align-self: center;
+	    display: flex;
+	    padding: 360px 0 320px;
+	}
+	.owl-nav {
+		display: none;
+	}
+	.owl-dots {
+		position: absolute;
+		right: 0;
+		bottom: 50px;
+	}
+	.owl-dots {
+	    margin-top: 40px;
+	    .owl-dot {
+	        border: 0;
+	        background: #fff;
+	        border-radius: 8px;
+	        margin: 0 5px;
+	        height: 8px;
+            width: 25px;
+	        span {
+	            display: none;
+	        }
+	        &.active {
+                background: var(--main-color);
+	        }
+	    }
+	}
+}
+
+.banner-map-area {
+	.single-product-wrap.style-bottom {
+	    max-width: 380px !important;
+	    margin-bottom: 0 !important;
+	}
+}

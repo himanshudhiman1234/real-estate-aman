@@ -1,0 +1,55 @@
+<%- include('../../partials/admin/navbar') %>
+
+
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <!-- <h1 class="h3 mb-2 text-gray-800">Sell Property</h1> -->
+                    <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. -->
+                        <!-- For more information about DataTables, please visit the <a target="_blank" -->
+                            <!-- href="https://datatables.net">official DataTables documentation</a>.</p> -->
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                          
+                            <h6 class="m-0 font-weight-bold text-primary">Add Land Type</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-container container">
+                                <!-- <h2 class="mb-4">Post Your Property for Sale</h2> -->
+                                <form action="/admin/add-landtype" method="POST" enctype="multipart/form-data">
+                                    <div class="row">
+                                    <!-- Column 1 -->
+                                    <div class="col-md-12">
+                                      
+                                      
+                                      <div class="mb-3">
+                                        <label>Land Type</label>
+                                        <input class="form-control" type="text"  name="landType" required>
+                                      </div>
+                                    
+                                      <div class="mb-3">
+                                        <label>Image</label>       
+                                        <input class="form-control" type="file"  name="image" >
+                                      </div>
+                                    </div>
+                                  <button type="submit" class="btn btn-primary mt-4">Add Land Type</button>
+                                </form>
+                              </div>
+                              
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+<%- include('../../partials/admin/footer') %>
+
+     

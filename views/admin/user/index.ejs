@@ -1,0 +1,149 @@
+
+
+
+
+<%- include('../../partials/admin/navbar') %>
+<style>
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+    
+    .switch input { 
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+    
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
+    
+    input:focus + .slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+    
+    input:checked + .slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+    
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 34px;
+    }
+    
+    .slider.round:before {
+      border-radius: 50%;
+    }
+    </style>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <!-- <h1 class="h3 mb-2 text-gray-800">Show property</   h1> -->
+                    <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+                        For more information about DataTables, please visit the <a target="_blank"
+                            href="https://datatables.net">official DataTables documentation</a>.</p> -->
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Users</h6>
+                        </div>
+
+                                                        <% if (success_msg && success_msg.length > 0) { %>
+  <div class="alert alert-success m-3"><%= success_msg[0] %></div>
+<% } %>
+
+<% if (error_msg && error_msg.length > 0) { %>
+  <div class="alert alert-danger m-3"><%= error_msg[0] %></div>
+<% } %>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Email</th>
+                                            <th>Role</th>
+                                            <th>Phone</th>
+                                            <th>Create At</th>
+                                            <th>Edit </th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Email</th>
+                                            <th>Role</th>
+                                            <th>Phone</th>
+                                            <th>Create At</th>
+                                            <th>Edit </th>
+                                            <th>Delete</th> 
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <% users.forEach(user => { %>
+                                            <tr>
+                                                  <!-- <% console.log(user.role.role_name) %> -->
+                                                <td><a href="/admin/user-properties/<%= user._id %>"><%= user.email %></a></td>
+                                             
+                                                    <td>
+                                                        <%= user.role.role_name %>
+                                                    </td>
+                                             
+                                                <td><%= user.phone %></td>
+                                                <td>
+                                                    <%= user.createdAt.toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })  %>
+
+                                                </td>
+                                                <td><a href="/admin/edit-user/<%= user._id %>">Edit</a></td>
+                                                <td> <form method="POST" action="/admin/delete-user/<%= user._id %>">
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </form></td>
+                                            </tr>
+                                            <% }); %>
+                                            
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+<%- include('../../partials/admin/footer') %>
+     
