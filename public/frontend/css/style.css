@@ -4809,9 +4809,3 @@ ul {
   border-right: 0;
 }
 
-.single-product-wrap .thumb img {
-  height: 287px;        /* or any fixed height you want */
-  width: 100%;          /* make sure it fills the container width */
-  object-fit: cover;    /* this ensures the image covers the area without distortion */
-  display: block;       /* removes default inline spacing */
-}

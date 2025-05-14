@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router();
-const {index,property,propertyDetails,propertyByCollection,about,contact,privacyPolicy,termsCondition} = require("../controller/homeController")
+const {index,property,propertyDetails,propertyByCollection,submitContact,about,contact,privacyPolicy,termsCondition} = require("../controller/homeController")
 const {authenticate,authorizeRole} = require("../middleware/authenticate")
  
 router.get("/",index)
@@ -8,6 +8,8 @@ router.get("/about",about)
 router.get("/contact",contact)
 router.get("/privacy-policy",privacyPolicy)
 router.get("/terms-condition",termsCondition)
+router.post("/submit-contact",submitContact)
+
 
 
 

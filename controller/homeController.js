@@ -1,5 +1,6 @@
 const Property = require("../models/property")
 const LandType = require("../models/landType")
+const nodemailer = require('nodemailer');
 
 const index = async(req,res) =>{
     const properties = await Property.find({status:1}).limit(3)
@@ -92,6 +93,47 @@ const about = (req,res) =>{
     res.render("frontend/about")
 }
 
+const submitContact = async(req,res) => {
+    const {name,email,phone,message} = req.body;
+        if (!name || !email || !phone || !message) {
+        return res.status(400).send("All fields are required.");
+    }
+
+    try {
+        // Configure the transporter
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+             user: process.env.EMAIL_USER, // your email
+        pass: process.env.EMAIL_PASS  // your app password
+            }
+        });
+
+        // Email content
+        const mailOptions = {
+            from: email, // user's email
+            to: 'contact.zameensale@gmail.com', // where you want to receive the message
+            subject: 'New Contact Form Submission',
+            html: `
+                <h3>New Contact Request</h3>
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Phone:</strong> ${phone}</p>
+                <p><strong>Message:</strong> ${message}</p>
+            `
+        };
+
+        // Send the email
+        await transporter.sendMail(mailOptions);
+
+        return res.redirect("/contact")
+    } catch (error) {
+        console.error("Error sending email:", error);
+        return res.status(500).send("Something went wrong.");
+    }
+
+    
+}
 
 const contact = (req,res) =>{
     res.render("frontend/contact")
@@ -103,4 +145,5 @@ const termsCondition = (req,res) =>{
     res.render("frontend/terms-condition")
 }
 
-module.exports = {index,property,propertyDetails,propertyByCollection,about,contact,privacyPolicy,termsCondition}
+
+module.exports = {index,property,propertyDetails,propertyByCollection,about,contact,privacyPolicy,submitContact,termsCondition}
