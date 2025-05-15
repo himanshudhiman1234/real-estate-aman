@@ -4809,3 +4809,11 @@ ul {
   border-right: 0;
 }
 
+.logo {
+    width: 18%;
+    margin-bottom: 23px;
+}
+
+.footer-top img {
+    height: 62%;
+}

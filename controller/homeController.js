@@ -67,7 +67,7 @@ const property = async(req,res)=>{
 const propertyDetails = async(req,res) =>{
     const propertyId = req.params.id;
     const property = await Property.findById(propertyId)
-    console.log(property)
+
     res.render("frontend/property-details",{property})
 }
 
@@ -145,5 +145,8 @@ const termsCondition = (req,res) =>{
     res.render("frontend/terms-condition")
 }
 
+const accessdenied = (req,res) =>{
+    res.render("access-denied")
+}
 
-module.exports = {index,property,propertyDetails,propertyByCollection,about,contact,privacyPolicy,submitContact,termsCondition}
+module.exports = {index,property,propertyDetails,propertyByCollection,about,contact,privacyPolicy,submitContact,termsCondition,accessdenied}

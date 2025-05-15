@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router();
-const {index,property,propertyDetails,propertyByCollection,submitContact,about,contact,privacyPolicy,termsCondition} = require("../controller/homeController")
+const {index,property,propertyDetails,propertyByCollection,submitContact,about,contact,privacyPolicy,termsCondition,accessdenied} = require("../controller/homeController")
 const {authenticate,authorizeRole} = require("../middleware/authenticate")
  
 router.get("/",index)
@@ -12,10 +12,11 @@ router.post("/submit-contact",submitContact)
 
 
 
+router.get("/access-denied",accessdenied)
 
 
 router.get("/properties",property)
-router.get("/property-details/:id",authenticate,authorizeRole('buyer','admin','seller'),propertyDetails)
+router.get("/property-details/:id",authorizeRole('buyer','admin','seller'),propertyDetails)
 
 router.get("/landtype/:land_type",propertyByCollection)
 

@@ -12,7 +12,7 @@ const sellerDashboard = async (req,res) =>{
         const properties = await Property.find({user_id: UserId})
         res.render("seller/index",{properties})
     }else{
-        return res.status(403).send("Access denied. Only sellers can view their properties.");
+        return res.redirect("/access-denied")
 
     }
     // console.log(properties)
@@ -25,7 +25,6 @@ const property = async (req,res) =>{
 }
 const submitProperty = async (req, res) => {
     try {
-        console.log("Reqqq",req.body)
         const {
             title, description, state,country, city, price, area,propertytype,areameasure,
             locality,address,pincode,sellerName,phone,email

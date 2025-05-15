@@ -113,11 +113,11 @@ const verifyOtp = async (req, res) => {
 
  // 🧠 Use role_name for redirection
  if (user.role_id.role_name === "buyer") {
-     res.redirect("/buyer");
+     res.redirect("/login");
  } else if (user.role_id.role_name === "seller") {
-     res.redirect("/seller");
+     res.redirect("/login");
  } else {
-     res.redirect("/admin");
+     res.redirect("/login");
  }
     } catch (error) {
         console.error(error);
@@ -138,7 +138,9 @@ const forgetPassword = async (req,res )=>{
     const user = await User.findOne({email});
     
     if(!user){
-        return res.status(404).json({message:"user not found"})
+            return res.render("forget-password", {error: "Please enter email Id." });
+
+        // return res.redirect("/forgot-password",{error:"Please enter email Id"})
     }
 
     const token = crypto.randomBytes(32).toString('hex');
