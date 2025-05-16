@@ -27,8 +27,15 @@
             </div>
             <div class="form-holder">
                 <div class="form-content">
-                    <div class="form-items">
-                        <h3 class="mb-4">Register</h3>
+                    <div class="form-items" style="background-color: #061539;">
+                                <div style="top:2%" class="website-logo">
+            <a href="/">
+              
+                    <img class="frontend-logo"  style="width: 50%;" src="/frontend/img/logo.png" alt="">
+                
+            </a>
+        </div>
+                        <h3 class=" mb-4" style="color: #ffff;margin-top: 18px;">Register</h3>
                         <% if (typeof error !== "undefined") { %>
                             <div style="color: red;" class="alert alert-danger">
                               <%= error %>
@@ -42,7 +49,7 @@
                             
                                     <select class="form-control" name="role">
                                         <% roles.forEach(role => { %>
-                                            <option value="<%= role.role_name %>"><%= role.role_name %></option>
+                                            <option value="<%= role.role_name %>"><%= role.role_name.charAt(0).toUpperCase() + role.role_name.slice(1) %></option>
                                         <% }); %>
                                     </select>
                                     
@@ -55,9 +62,9 @@
                             <div class="text">Or register with</div>
                             <a href="#"><i class="fab fa-facebook-f"></i>Facebook</a><a href="#"><i class="fab fa-google"></i>Google</a><a href="#"><i class="fab fa-linkedin-in"></i>Linkedin</a>
                         </div> -->
-                        <div class="page-links" style="text-align: center;margin-top: 10px;">
+                        <div class="page-links" style="text-align: center;margin-top: 10px;color: #ffff;">
                             
-                              <span>Already have an account?   <a href="/login">Sign In</a></span>
+                              <span>Already have an account?   <a style="color: #ffff;" href="/login">Sign In</a></span>
                         </div>
                     </div>
                 </div>

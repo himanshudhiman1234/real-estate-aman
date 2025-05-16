@@ -16,7 +16,7 @@ router.get("/access-denied",accessdenied)
 
 
 router.get("/properties",property)
-router.get("/property-details/:id",authorizeRole('buyer','admin','seller'),propertyDetails)
+router.get("/property-details/:id",authenticate,authorizeRole('buyer','admin','seller'),propertyDetails)
 
 router.get("/landtype/:land_type",propertyByCollection)
 
