@@ -55,11 +55,11 @@
             <div class="col-lg-4 col-md-6">
                 <div class="single-product-wrap style-2">
                     <div class="thumb">
-                             <% if (property.image ) { %>
-                                <img src="/uploads/<%= property.images[0] %>" alt="img">
-                            <% } else { %>
-                                <img src="/frontend/img/banner/1.jpg" alt="img">
-                            <% } %>
+                                        <% if (property.images && property.images.length > 0 && property.images[0]) { %>
+    <img src="/uploads/<%= property.images[0] %>" alt="img" loading="lazy">
+<% } else { %>
+    <img src="/frontend/img/banner/1.jpg" alt="img" loading="lazy">
+<% } %>
                         <!-- <img src="/uploads/<%= property.images[0] %>" alt="img"> -->
                         <div class="product-wrap-details">
                             <div class="media">
