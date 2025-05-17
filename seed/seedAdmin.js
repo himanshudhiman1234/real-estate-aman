@@ -18,7 +18,7 @@ mongoose.connect('mongodb+srv://humanshud950:himanshud950@cluster0.hsjzd.mongodb
 
     const role = await Role.findOne({ role_name: "admin" });
 
-    const hashPassword = await bcrypt.hash("admin", 10);
+    const hashPassword = await bcrypt.hash("aman@9869", 10);
 
     const user = { email: "admin@admin.com", phone : "1234567890",password:hashPassword,role_id:role.id};
       
