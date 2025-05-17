@@ -50,6 +50,7 @@ const property = async(req,res)=>{
     }
 
     const properties = await Property.find(query).sort(sortOption).limit(limit);
+    console.log(properties)
     const totalCount = await Property.countDocuments(query);
 
     const totalPages = Math.ceil(totalCount / limit);
