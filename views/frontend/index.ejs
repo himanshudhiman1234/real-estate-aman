@@ -165,7 +165,7 @@ display: none;
                         <div class="thumb" >
                                 
                            <% if (property.images && property.images.length > 0 && property.images[0]) { %>
-    <img src="/uploads/<%= property.images[0] %>" alt="img" loading="lazy">
+    <img src="<%= property.images[0] %>" alt="img" loading="lazy">
 <% } else { %>
     <img src="/frontend/img/banner/1.jpg" alt="img" loading="lazy">
 <% } %>
