@@ -5,10 +5,10 @@ const nodemailer = require('nodemailer');
 const index = async(req,res) =>{
     const properties = await Property.find({status:1}).limit(3)
     const property = await Property.find({status:1});
-
+    
 
     const Land = await LandType.find({})
-
+    // console.log(Land)
 
     res.render("frontend/index",{properties,Land,property})
 }
@@ -18,9 +18,9 @@ const property = async(req,res)=>{
     const search = req.query.search || "";
     const sort = req.query.sort || ""; // ✅ fix: define sort
     const city = req.query.city || "";
-    console.log("city",city)
+    // console.log("city",city)
     const state = req.query.state || "";
-    console.log("state",state)
+    // console.log("state",state)
 
     const page = parseInt(req.query.page || 1);
 
@@ -50,7 +50,7 @@ const property = async(req,res)=>{
     }
 
     const properties = await Property.find(query).sort(sortOption).limit(limit);
-    // console.log(properties)
+    console.log(properties)
     const totalCount = await Property.countDocuments(query);
 
     const totalPages = Math.ceil(totalCount / limit);
@@ -75,10 +75,10 @@ const propertyDetails = async(req,res) =>{
 
 const propertyByCollection  = async(req,res)=>{
     const propertyname = req.params.land_type;
-    console.log(propertyname)
+    // console.log(propertyname)
     try {
         const properties = await Property.find({ LandType: propertyname });
-        console.log(properties)
+        // console.log(properties)
         if (!properties) {
             return res.status(404).send("properties type not found");
         }

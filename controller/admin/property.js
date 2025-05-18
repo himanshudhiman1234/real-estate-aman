@@ -47,9 +47,8 @@ const updateProperty = async(req,res) =>{
             locality,address,pincode,sellerName,phone,email
         } = req.body;
         
-        const images = req.files?.map(file =>
-            path.relative("public/uploads", file.path).replace(/\\/g, "/")
-          ) || [];
+        const images = req.files?.map(file => file.path) || [];
+
     
         const data = { title, description, state,country, city, price,area,LandType:propertytype,
             locality,address,pincode,sellerName,phone,email,areameasure,
@@ -119,7 +118,13 @@ const submitProperty = async (req, res) => {
        console.log("userIDDD",userId)
         const images = req.files;
 
-        const imageFile = images.map((image) => image.filename);
+        // const imageFile = images.map((image) => image.filename);
+
+
+       const imageFile = images.map((image) => image.path); // <-- path has the secure_url
+
+
+
        
         const property = new Property({
             title, description, state,country, city, price,area,LandType:propertytype,

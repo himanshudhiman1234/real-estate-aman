@@ -98,7 +98,7 @@
                                         <% if (property.images && property.images.length > 0) { %>
                                           <% property.images.forEach(image => { %>
                                             <div class="col-md-4 mb-2">
-                                              <img src="/uploads/<%= image %>" alt="Property Image" class="img-fluid rounded" style="height: 150px; object-fit: cover;">
+                                              <img src="<%= image %>" alt="Property Image" class="img-fluid rounded" style="height: 150px; object-fit: cover;">
                                             </div>
                                           <% }) %>
                                         <% } else { %>

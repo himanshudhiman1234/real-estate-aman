@@ -1,7 +1,8 @@
 const express = require("express")
 const router = express.Router();
 const {properties,deleteProperty,editProperty,updateProperty,updateStatus,property,submitProperty} = require("../../controller/admin/property")
-const upload = require("../../middleware/multer")
+// const upload = require("../../middleware/multer")
+const upload = require('../../middleware/upload'); // using multer-storage-cloudinary
 
 router.get("/properties",properties)
 router.get("/edit-property/:id",editProperty)

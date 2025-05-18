@@ -241,10 +241,12 @@ display: none;
                 <div class="col-lg-4 col-md-6">
                     <div class="single-category-product-wrap">
                         <div class="thumb">
-                                               <% if (property.image ) { %>
-    <img src="/uploads/<%= property.image %>" alt="img" loading="lazy">
+                
+                           <% if (property.image && property.image.length > 0) { %>
+
+    <img src="<%= property.image %>" alt="img"  class="Property-image" loading="lazy">
 <% } else { %>
-    <img src="/frontend/img/banner/1.jpg" alt="img" loading="lazy">
+    <img src="/frontend/img/banner/1.jpg" alt="img" class="Property-image" loading="lazy">
 <% } %>
                             <!-- <img src="/uploads/<%= property.image %>" alt="img"> -->
                         </div>
@@ -293,7 +295,7 @@ display: none;
                                 <div class="thumb">
 
                                                     <% if (property.images && property.images.length > 0 && property.images[0]) { %>
-    <img src="/uploads/<%= property.images[0] %>" alt="img" loading="lazy">
+    <img src="<%= property.images[0] %>" alt="img" loading="lazy">
 <% } else { %>
     <img src="/frontend/img/banner/1.jpg" alt="img" loading="lazy">
 <% } %>

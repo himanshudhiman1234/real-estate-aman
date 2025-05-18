@@ -5,29 +5,24 @@ const landType =async(req,res) =>{
     res.render("admin/landtype/create")
 }
 
-const postLandType = async(req,res)=>{
-try{
-    const {landType} = req.body;
+const postLandType = async(req, res) => {
+  try {
+    const { landType } = req.body;
+    const imageFile = req.file ? req.file.path : null;
 
-const imageFile = req.file;
+    const Land = new Landtype({
+      land_type: landType,
+      image: imageFile
+    });
 
-const Land = new Landtype({
-    land_type:landType,
-    image: imageFile ? imageFile.filename : null
+    await Land.save();
+    req.flash('success_msg', 'Land Type has been added successfully');
+    res.redirect("/admin/land-types");
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-
-})
-await Land.save()
-req.flash('success_msg', 'Land Type has been added successfully');
-
-res.redirect("/admin/land-types")
-}catch(error){
-    console.log(error)
-}
-
-
-
-}
 const ShowlandType = async(req,res) =>{
     try{
         const lands = await  Landtype.find({});
@@ -48,41 +43,34 @@ const editLandType = async(req,res) =>{
     }
     }
 
-    const updateLandType = async(req,res) =>{
-    
-        try{
-            console.log(req.body)
-            
-              
-            const {
-                landType
-            } = req.body;
-            
-            const imageFile = req.file;
-        
-            const data = {  land_type:landType,
-            
-        }
-        if (imageFile) {
-            data.image = imageFile.filename;
-          }
-            const LandId = req.params.id;
-        
-            const land = await Landtype.findByIdAndUpdate(LandId, data, { new: true });
-    
-            if (!land) {
-                return res.status(404).send("land not found");
-            }
-            req.flash('success_msg', 'Land Type has been updated successfully');
+   const updateLandType = async(req, res) => {
+  try {
+    const { landType } = req.body;
+    const imageFile = req.file;
 
-            res.redirect(`/admin/land-types`); // Redirect to products page
-            
-        }catch(error){
-         console.log("Error updating product:", error);
-            res.status(500).send("Internal Server Error",error);
-        }
-       
+    const data = { land_type: landType };
+
+    if (imageFile) {
+      // Usually cloudinary file object has .path or .secure_url for full URL
+      data.image = imageFile.path || imageFile.secure_url || imageFile.filename;
     }
+
+    const LandId = req.params.id;
+
+    const land = await Landtype.findByIdAndUpdate(LandId, data, { new: true });
+
+    if (!land) {
+      return res.status(404).send("Land not found");
+    }
+
+    req.flash('success_msg', 'Land Type has been updated successfully');
+    res.redirect(`/admin/land-types`);
+  } catch (error) {
+    console.log("Error updating land type:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
 
 const deleteLandType = async(req,res) =>{
 try{

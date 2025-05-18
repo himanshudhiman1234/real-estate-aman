@@ -11,7 +11,7 @@ const sendOTP = async (email, otp) => {
     });
 
     await transporter.sendMail({
-        from: `"Real Estate App" <${process.env.EMAIL_USER}>`,
+        from: `"Zameen Sale" <${process.env.EMAIL_USER}>`,
         to: email,
         subject: "Your OTP Code",
         text: `Your OTP for registration is: ${otp}`
