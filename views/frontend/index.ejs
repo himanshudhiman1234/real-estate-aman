@@ -9,7 +9,11 @@ display: none;
 .city-select .nice-select.show {
 display: block;
 }
-
+img.Property-image.land-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
 /* Initially hide the default select dropdown */
 /* .city-select #city {
 display: none;
@@ -244,7 +248,7 @@ display: none;
                 
                            <% if (property.image && property.image.length > 0) { %>
 
-    <img src="<%= property.image %>" alt="img"  class="Property-image" loading="lazy">
+    <img src="<%= property.image %>" alt="img"  class="Property-image land-image" loading="lazy">
 <% } else { %>
     <img src="/frontend/img/banner/1.jpg" alt="img" class="Property-image" loading="lazy">
 <% } %>
@@ -307,7 +311,8 @@ display: none;
                                     </div> 
                                 </div> 
                                 <div class="product-details-inner">
-                                    <h4><a href="property-details.html"><%= property.title %></a></h4>
+                                    <h4><a href="property-details.html"><%= property.title.substring(0, 30) %>
+</a></h4>
                                     <ul class="meta-inner">
                                         <li><img src="/frontend/img/icon/location2.png"  loading="lazy" alt="img"><%= property.state %> </li>
                                         <li><a href="#">For Sell</a></li>
