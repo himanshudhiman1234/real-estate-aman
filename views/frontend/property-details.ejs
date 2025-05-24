@@ -31,7 +31,20 @@
                         </ul>
                     </div>
                     <div class="col-lg-5 text-lg-right">
-                        <h4>$ <%= property.price %> </h4>
+                         <% function formatIndianPrice(price) {
+  if (price >= 10000000) {
+    return (price / 10000000).toFixed(price % 10000000 === 0 ? 0 : 2) + ' Crore';
+  } else if (price >= 100000) {
+    return (price / 100000).toFixed(price % 100000 === 0 ? 0 : 2) + ' Lakh';
+  } else {
+    return price.toLocaleString('en-IN'); // fallback
+  }
+} %>
+
+<li>₹ <%= formatIndianPrice(property.price) %></li>
+
+<!-- <li>Price: <%= property.price %></li> -->
+                        <!-- <h4>₹ <%= property.price %> </h4> -->
                         <!-- <div class="btn-wrap">
                             <a class="btn btn-base btn-sm" href="#">BUILD</a>
                             <a class="btn btn-blue btn-sm" href="#">BUY</a>
@@ -102,7 +115,19 @@
                                     <li>City: <%= property.city %> </li>
                                     <li>Address: <%= property.address %></li>
                                     <li>Pincode: <%= property.pincode %></li>
-                                    <li>Price: <%= property.price %></li>
+                                           <% function formatIndianPrice(price) {
+  if (price >= 10000000) {
+    return (price / 10000000).toFixed(price % 10000000 === 0 ? 0 : 2) + ' Crore';
+  } else if (price >= 100000) {
+    return (price / 100000).toFixed(price % 100000 === 0 ? 0 : 2) + ' Lakh';
+  } else {
+    return price.toLocaleString('en-IN'); // fallback
+  }
+} %>
+
+<li>Price : ₹ <%= formatIndianPrice(property.price) %></li>
+
+                                    <!-- <li>Price: <%= property.price %></li> -->
                                 </ul>
                             </div>
                             <!-- <div class="col-md-4">

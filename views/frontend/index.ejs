@@ -190,7 +190,19 @@ display: none;
                                 <!-- <span class="fav-btn float-right" href="#"><i class="far fa-heart"></i></span> -->
                             </div>
                             <div class="product-meta">
-                                <span class="price">$ <%= property.price %></span>
+                                <% function formatIndianPrice(price) {
+  if (price >= 10000000) {
+    return (price / 10000000).toFixed(price % 10000000 === 0 ? 0 : 2) + ' Crore';
+  } else if (price >= 100000) {
+    return (price / 100000).toFixed(price % 100000 === 0 ? 0 : 2) + ' Lakh';
+  } else {
+    return price.toLocaleString('en-IN'); // fallback
+  }
+} %>
+
+<span class="price">₹ <%= formatIndianPrice(property.price) %></span>
+
+                                <!-- <span class="price">₹ <%= property.price %></span> -->
                                 <div class="float-right d-inline-block">
                                     <ul>
                                         <li><img src="/frontend/img/icon/triangle.png" alt="img" loading="lazy"><%= property.area %> <%= property.areameasure %></li>
