@@ -50,9 +50,51 @@
                     </div>
                 </div>        
             </div>    
+            <style>
+                .single-product-wrap {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.thumb {
+    height: 200px; /* Or 250px as needed */
+    overflow: hidden;
+}
+
+.thumb img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.product-details-inner {
+    flex: 1; /* Fills remaining height */
+    padding: 10px;
+    overflow: hidden;
+}
+
+.product-details-inner p {
+    max-height: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.cards-property{
+    margin-bottom: 20px;
+}
+
+.single-product-wrap.style-2 .product-meta-bottom span {
+    border-left: 1px solid #ececec;
+    border-right: 1px solid #ececec;
+    display: inline-block;
+    margin-right: -4px;
+    text-align: center;
+    width: 50.33%;
+}
+            </style>
+            <div class="row d-flex flex-wrap">
+
             <% properties.forEach(property => { %>  
                 <a href="/property-details/<%= property._id %>">  
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-4 col-md-6 cards-property">
                 <div class="single-product-wrap style-2">
                     <div class="thumb">
                         
@@ -104,14 +146,15 @@
                         <!-- <span class="price">₹ <%= property.price %></span> -->
                     </div>
                     <div class="product-meta-bottom style-2">
-                        <span><%= property.LandType %><span>Land Type</span></span>
-                        <span class="border-none"><%= property.city %> <span>City</span></span>
-                        <span><%= property.country %>  <span>Country</span></span>
+                        <span>  <span></span><b><%= property.LandType %> Land</b></span>
+                        <span class="border-none"><b><%= property.city %></b> <span>City</span></span>
+                        <!-- <span><%= property.country %>  <span>Country</span></span> -->
                     </div>         
                 </div>
             </div>
         </a>
             <% }); %>
+            </div>
             <!-- <div class="col-lg-4 col-md-6">
                 <div class="single-product-wrap style-2">
                     <div class="thumb">
