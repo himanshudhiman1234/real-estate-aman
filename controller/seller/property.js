@@ -27,10 +27,10 @@ const submitProperty = async (req, res) => {
     try {
         const {
             title, description, state,country, city, price, area,propertytype,areameasure,
-            locality,address,pincode,sellerName,phone,email
-        } = req.body;
+            locality,address,pincode,sellerName,phone,email,listed_by
+        } = req.body;   
           if( !title ||  !description ||  !state || !country || !city || !price || !area || !propertytype || !areameasure ||
-            locality || !address ||!pincode ||!sellerName || !phone||!email){
+            locality || !address ||!pincode ||!sellerName || !phone||!email ||!listed_by){
                  const Lands = await LandType.find({});
       return res.render("seller/postProperty", { error: "All fields are required",Lands });
 
@@ -45,7 +45,7 @@ const submitProperty = async (req, res) => {
         const property = new Property({
             title, description, state,country, city, price,area,LandType:propertytype,
             locality,address,pincode,sellerName,phone,email,areameasure,
-            images: imageFile,user_id: userId  
+            images: imageFile,user_id: userId,listed_by
         });
 
         console.log("Property to save:", property);
@@ -81,14 +81,14 @@ const updateProperty = async(req,res) =>{
           
         const {
             title, description, state,country, city, price, area,propertytype,areameasure,
-            locality,address,pincode,sellerName,phone,email
+            locality,address,pincode,sellerName,phone,email,listed_by
         } = req.body;
         
             const images = req.files?.map(file => file.path) || [];
 
     
         const data = {  title, description, state,country, city, price,area,LandType:propertytype,
-            locality,address,pincode,sellerName,phone,email,areameasure,
+            locality,address,pincode,sellerName,phone,email,areameasure,listed_by,
             images
     }
         const PropertyId = req.params.id;

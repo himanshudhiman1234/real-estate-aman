@@ -24,6 +24,7 @@
                     <div class="col-lg-7">
                         <h3><%= property.title %>.</h3>
                         <p><img src="/frontend/img/icon/location2.png" alt="img"> <%= property.address %>. </p>
+
                         <ul>
                             <!-- <li><%= property.bedrooms %> Bedroom</li>
                             <li><%= property.bathrooms %> Bathroom</li>
@@ -108,6 +109,9 @@
                                     <li>Area Measure: <%= property.areameasure %></li>
                                     <li>Area: <%= property.area %></li>
                                     <li>State:  <%= property.state %></li>
+                                    <li>Listed By:  <%= property.listed_by %></li>
+
+                                    
                                 </ul>
                             </div>
                             <div class="col-md-6">
@@ -115,6 +119,7 @@
                                     <li>City: <%= property.city %> </li>
                                     <li>Address: <%= property.address %></li>
                                     <li>Pincode: <%= property.pincode %></li>
+                                    
                                            <% function formatIndianPrice(price) {
   if (price >= 10000000) {
     return (price / 10000000).toFixed(price % 10000000 === 0 ? 0 : 2) + ' Crore';

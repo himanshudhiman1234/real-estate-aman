@@ -28,12 +28,12 @@
                             <h6 class="m-0 font-weight-bold text-primary">All Listed Properties</h6>
                         </div>
                          <% if (success_msg && success_msg.length > 0) { %>
-  <div class="alert alert-success m-3"><%= success_msg[0] %></div>
-<% } %>
+                        <div class="alert alert-success m-3"><%= success_msg[0] %></div>
+                        <% } %>
 
-<% if (error_msg && error_msg.length > 0) { %>
-  <div class="alert alert-danger m-3"><%= error_msg[0] %></div>
-<% } %>
+                        <% if (error_msg && error_msg.length > 0) { %>
+                        <div class="alert alert-danger m-3"><%= error_msg[0] %></div>
+                        <% } %>
 
                         <div class="card-body">
                             <div class="table-responsive">

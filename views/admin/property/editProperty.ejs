@@ -107,6 +107,14 @@
                                       <label>Upload Property Images</label>
                                       <input class="form-control" type="file" name="images" multiple>
                                     </div>
+                                      <div class="mb-3">
+                                        <label>Land Listed By</label>
+                                        <select class="form-control" name="listed_by" required>
+                                          <!-- <option value="">--SELECT LISTED B--</option> -->
+                                          <option value="Owner"<%= property.listed_by === "Owner" ? "selected" : "" %>>Owner</option>
+                                          <option value="Dealer"<%= property.listed_by === "Dealer" ? "selected" : "" %>>Dealer</option>
+                                        </select>
+                                      </div>
                                     </div>
                               
                                     <!-- Column 2 -->

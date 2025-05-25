@@ -44,7 +44,7 @@ const updateProperty = async(req,res) =>{
           
         const {
             title, description, state,country, city, price, area,propertytype,areameasure,
-            locality,address,pincode,sellerName,phone,email
+            locality,address,pincode,sellerName,phone,email,listed_by
         } = req.body;
         
         const images = req.files?.map(file => file.path) || [];
@@ -52,7 +52,7 @@ const updateProperty = async(req,res) =>{
     
         const data = { title, description, state,country, city, price,area,LandType:propertytype,
             locality,address,pincode,sellerName,phone,email,areameasure,
-            images
+            images,listed_by
     }
         const PropertyId = req.params.id;
     
@@ -106,7 +106,7 @@ const submitProperty = async (req, res) => {
         console.log("Reqqq",req.body)
         const {
             title, description, state,country, city, price, area,propertytype,areameasure,
-            locality,address,pincode,sellerName,phone,email
+            locality,address,pincode,sellerName,phone,email,listed_by
         } = req.body;
         if( !title ||  !description ||  !state || !country || !city || !price || !area || !propertytype || !areameasure ||
             locality || !address ||!pincode ||!sellerName || !phone||!email){
@@ -129,7 +129,7 @@ const submitProperty = async (req, res) => {
         const property = new Property({
             title, description, state,country, city, price,area,LandType:propertytype,
             locality,address,pincode,sellerName,phone,email,areameasure,
-            images: imageFile,user_id: userId  
+            images: imageFile,user_id: userId ,listed_by
         });
 
         console.log("Property to save:", property);

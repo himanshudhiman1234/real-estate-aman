@@ -36,6 +36,11 @@ const propertySchema = new mongoose.Schema({
         type: String,
         required: true
       },
+       listed_by: {
+        type: String,
+        required: true,
+        default:"Owner"
+      },
       city: {
         type: String,
         required: true
