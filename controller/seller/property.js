@@ -69,45 +69,58 @@ const editProperty = async (req,res) =>{
     res.render("seller/editProperty",{property,Lands})
 }
 
-const updateProperty = async(req,res) =>{
+const updateProperty = async (req, res) => {
+  try {
+    req.body.negotiable = req.body.negotiable === "on";
 
-    try{
-        console.log(req.body)
-        if (req.body.negotiable === "on") {
-            req.body.negotiable = true;
-          } else {
-            req.body.negotiable = false;
-          }
-          
-        const {
-            title, description, state,country, city, price, area,propertytype,areameasure,
-            locality,address,pincode,sellerName,phone,email,listed_by
-        } = req.body;
-        
-            const images = req.files?.map(file => file.path) || [];
+    const {
+      title, description, state, country, city, price, area, propertytype, areameasure,
+      locality, address, pincode, sellerName, phone, email, listed_by
+    } = req.body;
 
-    
-        const data = {  title, description, state,country, city, price,area,LandType:propertytype,
-            locality,address,pincode,sellerName,phone,email,areameasure,listed_by,
-            images
+    const PropertyId = req.params.id;
+
+    const data = {
+      title,
+      description,
+      state,
+      country,
+      city,
+      price,
+      area,
+      LandType: propertytype,
+      areameasure,
+      locality,
+      address,
+      pincode,
+      sellerName,
+      phone,
+      email,
+      listed_by,
+      negotiable: req.body.negotiable,
+    };
+
+    // 🟡 If files exist, then add images to the update
+    if (req.files && req.files.length > 0) {
+      data.images = req.files.map(file => file.path);
     }
-        const PropertyId = req.params.id;
-    
-        const property = await Property.findByIdAndUpdate(PropertyId, data, { new: true });
 
-        if (!property) {
-            return res.status(404).send("Property not found");
-        }
-    req.flash('success_msg', 'Property has been Updated successfully');
-    res.redirect("/seller/dashboard")
-        // res.redirect(`/seller/edit-property/${PropertyId}`); // Redirect to products page
-        
-    }catch(error){
-     console.log("Error updating product:", error);
-        res.status(500).send("Internal Server Error",error);
+    const updatedProperty = await Property.findByIdAndUpdate(PropertyId, data, { new: true });
+
+    if (!updatedProperty) {
+      return res.status(404).send("Property not found");
     }
-   
-}
+
+    req.flash('success_msg', 'Property has been updated successfully');
+    res.redirect("/seller/dashboard");
+
+  } catch (error) {
+    console.error("Error updating property:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+
 
 const deleteProperty = async(req,res) =>{
     try{

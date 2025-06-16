@@ -32,45 +32,67 @@ const editProperty = async (req,res) =>{
     res.render("admin/property/editProperty",{property,Lands})
 }
 
-const updateProperty = async(req,res) =>{
+const updateProperty = async (req, res) => {
+  try {
+    console.log(req.body);
 
-    try{
-        console.log(req.body)
-        if (req.body.negotiable === "on") {
-            req.body.negotiable = true;
-          } else {
-            req.body.negotiable = false;
-          }
-          
-        const {
-            title, description, state,country, city, price, area,propertytype,areameasure,
-            locality,address,pincode,sellerName,phone,email,listed_by
-        } = req.body;
-        
-        const images = req.files?.map(file => file.path) || [];
+    // Convert negotiable string to boolean
+    req.body.negotiable = req.body.negotiable === "on";
 
-    
-        const data = { title, description, state,country, city, price,area,LandType:propertytype,
-            locality,address,pincode,sellerName,phone,email,areameasure,
-            images,listed_by
+    const {
+      title, description, state, country, city, price, area, propertytype, areameasure,
+      locality, address, pincode, sellerName, phone, email, listed_by
+    } = req.body;
+
+    const PropertyId = req.params.id;
+
+    // 🟢 Fetch existing property first
+    const property = await Property.findById(PropertyId);
+    if (!property) {
+      return res.status(404).send("Property not found");
     }
-        const PropertyId = req.params.id;
-    
-        const property = await Property.findByIdAndUpdate(PropertyId, data, { new: true });
 
-        if (!property) {
-            return res.status(404).send("Property not found");
-        }
-        req.flash('success_msg', 'Property has been updated successfully');
-        res.redirect(`/admin/edit-property/${PropertyId}`)
-
-        
-    }catch(error){
-     console.log("Error updating product:", error);
-        res.status(500).send("Internal Server Error",error);
+    // 🔁 Retain old images if no new ones uploaded
+    let images;
+    if (req.files && req.files.length > 0) {
+      images = req.files.map(file => file.path);
+    } else {
+      images = property.images;
     }
-   
-}
+
+    // Prepare updated data
+    const data = {
+      title,
+      description,
+      state,
+      country,
+      city,
+      price,
+      area,
+      LandType: propertytype,
+      locality,
+      address,
+      pincode,
+      sellerName,
+      phone,
+      email,
+      areameasure,
+      images,
+      listed_by,
+      negotiable: req.body.negotiable,
+    };
+
+    const updatedProperty = await Property.findByIdAndUpdate(PropertyId, data, { new: true });
+
+    req.flash('success_msg', 'Property has been updated successfully');
+    res.redirect(`/admin/edit-property/${PropertyId}`);
+    
+  } catch (error) {
+    console.error("Error updating property:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
 const updateStatus = async(req,res) =>{
     try{
         console.log(req.body)
