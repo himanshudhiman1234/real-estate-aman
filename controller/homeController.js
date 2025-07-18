@@ -16,7 +16,7 @@ const index = async(req,res) =>{
 
 const property = async(req,res)=>{
     const search = req.query.search || "";
-    const sort = req.query.sort || ""; // ✅ fix: define sort
+    const sort = req.query.sort || ""; 
     const city = req.query.city || "";
     // console.log("city",city)
     const state = req.query.state || "";
@@ -49,8 +49,8 @@ const property = async(req,res)=>{
         sortOption.price = -1;
     }
 
-    const properties = await Property.find(query).sort(sortOption).limit(limit);
-    console.log(properties)
+    const properties = await Property.find(query).sort(sortOption).skip(skip).limit(limit);
+    
     const totalCount = await Property.countDocuments(query);
 
     const totalPages = Math.ceil(totalCount / limit);
