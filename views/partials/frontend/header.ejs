@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>zameen-sale</title>
+<title><%= (typeof title !== "undefined" && title) ? title : "Zameensale" %></title>
+<meta name="description" content="<%= (typeof description !== "undefined" && description) ? description : "" %>">
+<meta name="keywords" content="<%= (typeof keywords !== "undefined" && keywords) ? keywords : "" %>">
+
+
+
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <!-- Stylesheet -->
@@ -58,6 +63,9 @@
                                 <a class="ml-0" href="/register">Register</a>
                                 <a href="/login ">Login</a>
                             </li>
+
+                            
+                  
                             <li class="social-area">
                                 <a href="https://www.facebook.com/share/1Ey39zZxBk/"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
                                 <!-- <a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a> -->
@@ -81,7 +89,11 @@
                 </div>
                 <div class="logo">
                     <a href="/"><img src="/frontend/img/logo.png" alt="img"></a>
+
+
                 </div>
+                
+
                 <div class="nav-right-part nav-right-part-mobile">
                    
                     
@@ -134,6 +146,8 @@
                             </ul> -->
                         <!-- </li> -->
                         <li><a href="/contact">Contact</a></li>
+                        
+
                     </ul>
                 </div>
                 <div class="nav-right-part nav-right-part-desktop">

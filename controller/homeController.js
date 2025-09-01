@@ -10,7 +10,11 @@ const index = async(req,res) =>{
     const Land = await LandType.find({})
     // console.log(Land)
 
-    res.render("frontend/index",{properties,Land,property})
+    res.render("frontend/index",{
+         title: "Land for Sale in India – Buy Agriculture, Farm & Residential Plots | ZameenSale",
+        description: "Find verified agriculture, farm, and residential land for sale in India. Explore Haryana, Punjab, and NCR plots. Best land deals 2025.",
+        keywords: "Land for Sale, Agriculture Land, Farm Land, Residential Plots",
+        properties,Land,property})
 }
 
 
@@ -84,7 +88,9 @@ const propertyByCollection  = async(req,res)=>{
         }
 
        
-    res.render("frontend/collection-properties",{properties})
+    res.render("frontend/collection-properties",{
+        
+        properties})
     }catch(error){
 
     }
