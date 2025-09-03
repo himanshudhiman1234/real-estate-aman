@@ -19,6 +19,23 @@
     <link rel="stylesheet" href="/frontend/css/responsive.css">
 
 </head>
+<style>
+        @media only screen and (max-width: 768px) {
+    .post-property.btn {
+    height: 36px;
+    line-height: 38px;
+    padding: 0px 16px;
+  }
+}
+
+    @media only screen and (min-width: 768px) {
+    .post-property.btn {
+    display: none;
+  }
+}
+  
+  
+     </style>
 <body>
 
     <!-- preloader area start -->
@@ -65,13 +82,45 @@
                             </li>
 
                             
-                  
+                           <% if (user && user.role === 'buyer') { %>
+    <li>
+        <a  style="background-color: #ff4700fc;"  class="post-property btn btn-base" href="/logout">
+            <span class="btn-icon"><i   style="background-color: #ff4700fc;"   class="fa fa-plus"></i></span> 
+            <span class="btn-text">Logout</span>
+        </a>
+    </li>
+<% } else if (user && (user.role === 'seller')) { %>
+    <li>
+        <a class="post-property btn btn-base" href="/seller/post-property">
+            <span class="btn-icon"><i class="fa fa-plus"></i></span> 
+            <span class="btn-text">Dashboard</span>
+        </a>
+    </li>
+<% } else if (user && (user.role === 'admin')) { %>
+    <li>
+        <a class="post-property btn btn-base" href="/admin/create-properties">
+            <span class="btn-icon"><i class="fa fa-plus"></i></span> 
+            <span class="btn-text">Dashboard</span>
+        </a>
+    </li>
+<% }
+else { %>
+  
+    <style>
+        .mobile-res{
+            display: none !important;
+        }
+    </style>
+    <li class="mobile-res">
+        <a class="post-property btn btn-base" href="/login">
+            <span class="btn-icon"><i class="fa fa-plus"></i></span> 
+            <span class="btn-text">POST PROPERTY</span>
+        </a>
+    </li>
+<% } %>
                             <li class="social-area">
                                 <a href="https://www.facebook.com/share/1Ey39zZxBk/"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-                                <!-- <a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a> -->
                                 <a href="https://www.instagram.com/zameensale"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-                                <!-- <a href="#"><i class="fab fa-skype" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fab fa-pinterest-p" aria-hidden="true"></i></a> -->
                             </li>
                         </ul>
                     </div>

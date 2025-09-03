@@ -1,190 +1,177 @@
 <%- include('../partials/frontend/header') %>
 
 <div class="breadcrumb-area bg-overlay-2" style="background-image:url('assets/img/other/6.png')">
-    <div class="container">
-        <div class="breadcrumb-inner">
-            <div class="section-title text-center">
-                <h2 class="page-title">Property Grid</h2>
-                <ul class="page-list">
-                    <li><a href="index.html">Home</a></li>
-                    <li>Property Grid</li>
-                </ul>
-            </div>
-        </div>
+  <div class="container">
+    <div class="breadcrumb-inner">
+      <div class="section-title text-center">
+        <h2 class="page-title">Property Grid</h2>
+        <ul class="page-list">
+          <li><a href="index.html">Home</a></li>
+          <li>Property Grid</li>
+        </ul>
+      </div>
     </div>
+  </div>
 </div>
 <!-- breadcrumb end --> 
 
-<!-- blog-page- Start --> 
 <div class="blog-page-area pt-5">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12">
-                <div class="product-search-inner bg-main">
-                    <div class="row custom-gutters-20">
-                        <div class="col-md-3 align-self-center">
-                            <h5> <%= totalCount %> Properties</h5>
-                        </div>
-                        <div class="col-md-6 mt-2 mt-md-0">
-                            <div class="widget-search">
-                                <form action="/properties" method="get">
-                                <div class="single-search-inner">
-
-                                    <input type="text" name="search" value="<%= typeof search !== 'undefined' ? search : '' %>" placeholder="Search your address">
-                                    <button><i class="la la-search"></i></button>
-                                </div>
-                          
-                            </div>
-                        </div>
-                        <div class="col-md-3 mt-2 mt-md-0 align-self-center">
-                            <div class="single-select-inner">
-                                <select name="sort" onchange="this.form.submit()">
-                                    <option value="">Sort By</option>
-                                    <option value="asc" <%= sort === 'asc' ? 'selected' : '' %>>Price: Low to High</option>
-                                    <option value="desc" <%= sort === 'desc' ? 'selected' : '' %>>Price: High to Low</option>
-                                  </select>
-                                  
-                            </div>
-                        </div>
-                    </form>
-                    </div>
-                </div>        
-            </div>    
-            <style>
-                .single-product-wrap {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-.thumb {
-    height: 200px; /* Or 250px as needed */
-    overflow: hidden;
-}
-
-.thumb img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-}
-.product-details-inner {
-    flex: 1; /* Fills remaining height */
-    padding: 10px;
-    overflow: hidden;
-}
-
-.product-details-inner p {
-    max-height: 60px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-.cards-property{
-    margin-bottom: 20px;
-}
-
-.single-product-wrap.style-2 .product-meta-bottom span {
-    border-left: 1px solid #ececec;
-    border-right: 1px solid #ececec;
-    display: inline-block;
-    margin-right: -4px;
-    text-align: center;
-    width: 50.33%;
-}
-            </style>
-            <div class="row d-flex flex-wrap" >
-
-            <% properties.forEach(property => { %>  
-                <a href="/property-details/<%= property._id %>">  
-            <div class="col-lg-4 col-md-6 cards-property" style="cursor: pointer;" onclick="window.location.href='/property-details/<%= property._id %>'">
-                <div class="single-product-wrap style-2">
-                    <div class="thumb">
-                        
-                       
-
-                             <% if (property.images ) { %>
-                                <img src="<%= property.images[0] %>" alt="img">
-                            <% } else { %>
-                                <img src="/frontend/img/banner/1.jpg" alt="img">
-                            <% } %>
-                        <!-- <img src="/uploads/<%= property.images[0] %>" alt="img"> -->
-                        <div class="product-wrap-details">
-                            <div class="media">
-                                <!-- <div class="author">
-                                    <img src="/frontend/img/author/1.png" alt="img">           
-                                </div> -->
-                                <div class="media-body">
-                                    <!-- <h6><a href="#">Owner Name</a></h6> -->
-                                    <p>
-                                        <!-- <img src="/frontend/img/icon/location-alt.png" alt="img"> -->
-                                        <%= property.state %> </p>
-                                </div>
-                                <a class="fav-btn float-right" href="#">
-                                    <!-- <i class="far fa-heart"></i> -->
-                                </a>
-                            </div>
-                        </div> 
-                    </div> 
-                    <div class="product-details-inner">
-                        <h4><%= property.address %></h4>
-                        <ul class="meta-inner">
-                            <!-- <li><img src="/frontend/img/icon/location2.png" alt="img"><%= property.city %></li> -->
-                            <li><a href="#">For Sell</a></li>
-                        </ul>
-                        <p><%= property.description %> </p>
-
-                               <% function formatIndianPrice(price) {
-  if (price >= 10000000) {
-    return (price / 10000000).toFixed(price % 10000000 === 0 ? 0 : 2) + ' Crore';
-  } else if (price >= 100000) {
-    return (price / 100000).toFixed(price % 100000 === 0 ? 0 : 2) + ' Lakh';
-  } else {
-    return price.toLocaleString('en-IN'); // fallback
-  }
-} %>
-
-<span class="price">₹ <%= formatIndianPrice(property.price) %></span>
-
-                        <!-- <span class="price">₹ <%= property.price %></span> -->
-                    </div>
-                    <div class="product-meta-bottom style-2">
-                        <span>  <span></span><b><%= property.LandType %> Land</b></span>
-                        <span class="border-none"><b><%= property.city %></b> <span>City</span></span>
-                        <!-- <span><%= property.country %>  <span>Country</span></span> -->
-                    </div>         
-                </div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <!-- Search & Sort -->
+        <div class="product-search-inner bg-main">
+          <div class="row custom-gutters-20">
+            <div class="col-md-3 align-self-center">
+              <h5><%= totalCount %> Properties</h5>
             </div>
-        </a>
-            <% }); %>
+
+            <div class="col-md-6 mt-2 mt-md-0">
+              <div class="widget-search">
+                <form action="/properties" method="get">
+                  <div class="single-search-inner">
+                    <input type="text" name="search" value="<%= typeof search !== 'undefined' ? search : '' %>" placeholder="Search your address">
+                    <button><i class="la la-search"></i></button>
+                  </div>
+              </div>
             </div>
-       
-            <div class="pagination-area text-center mt-4" style="margin-bottom:32px">
-                <ul class="pagination">
-                    <% if (currentPage > 1) { %>
-                        <li class="page-item">
-                            <a class="page-link" href="?search=<%= search %>&sort=<%= sort %>&page=<%= currentPage - 1 %>">
-                                <i class="la la-angle-double-left"></i>
-                            </a>
-                        </li>
-                    <% } %>
-            
-                    <% for (let i = 1; i <= totalPages; i++) { %>
-                        <li class="page-item <%= i === currentPage ? 'active' : '' %>">
-                            <a class="page-link" href="?search=<%= search %>&sort=<%= sort %>&page=<%= i %>"><%= i %></a>
-                        </li>
-                    <% } %>
-            
-                    <% if (currentPage < totalPages) { %>
-                        <li class="page-item">
-                            <a class="page-link" href="?search=<%= search %>&sort=<%= sort %>&page=<%= currentPage + 1 %>">
-                                <i class="la la-angle-double-right"></i>
-                            </a>
-                        </li>
-                    <% } %>
-                </ul>
-            </div> 
-            
+
+            <div class="col-md-3 mt-2 mt-md-0 align-self-center">
+              <div class="single-select-inner">
+                <select name="sort" onchange="this.form.submit()">
+                  <option value="">Sort By</option>
+                  <option value="asc" <%= sort === 'asc' ? 'selected' : '' %>>Price: Low to High</option>
+                  <option value="desc" <%= sort === 'desc' ? 'selected' : '' %>>Price: High to Low</option>
+                </select>
+              </div>
+            </div>
+            </form>
+          </div>
         </div>
-    </div>
-</div>
+      </div>    
 
+      <style>
+        .single-product-wrap {
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+        }
+        .thumb {
+          height: 200px;
+          overflow: hidden;
+        }
+        .thumb img {
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+        }
+        .product-details-inner {
+          flex: 1;
+          padding: 10px;
+          overflow: hidden;
+        }
+        .product-details-inner p {
+          max-height: 60px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .cards-property {
+          margin-bottom: 20px;
+        }
+        .single-product-wrap.style-2 .product-meta-bottom span {
+          border-left: 1px solid #ececec;
+          border-right: 1px solid #ececec;
+          display: inline-block;
+          margin-right: -4px;
+          text-align: center;
+          width: 50.33%;
+        }
+      </style>
+
+      <!-- Property Cards -->
+      <div class="row d-flex flex-wrap">
+        <% properties.forEach(property => { %>  
+          <a href="/property-details/<%= property._id %>">  
+            <div class="col-lg-4 col-md-6 cards-property" style="cursor: pointer;" onclick="window.location.href='/property-details/<%= property._id %>'">
+              <div class="single-product-wrap style-2">
+                <div class="thumb">
+                  <% if (property.images) { %>
+                    <img src="<%= property.images[0] %>" alt="img">
+                  <% } else { %>
+                    <img src="/frontend/img/banner/1.jpg" alt="img">
+                  <% } %>
+                  <div class="product-wrap-details">
+                    <div class="media">
+                      <div class="media-body">
+                        <p><%= property.state %></p>
+                      </div>
+                      <a class="fav-btn float-right" href="#"></a>
+                    </div>
+                  </div> 
+                </div> 
+
+                <div class="product-details-inner">
+                  <h4><%= property.address %></h4>
+                  <ul class="meta-inner">
+                    <li><a href="#">For Sell</a></li>
+                  </ul>
+                  <p><%= property.description %></p>
+
+                  <% function formatIndianPrice(price) {
+                      if (price >= 10000000) {
+                        return (price / 10000000).toFixed(price % 10000000 === 0 ? 0 : 2) + ' Crore';
+                      } else if (price >= 100000) {
+                        return (price / 100000).toFixed(price % 100000 === 0 ? 0 : 2) + ' Lakh';
+                      } else {
+                        return price.toLocaleString('en-IN');
+                      }
+                  } %>
+                  <span class="price">₹ <%= formatIndianPrice(property.price) %></span>
+                </div>
+
+                <div class="product-meta-bottom style-2">
+                  <span><b><%= property.LandType %> Land</b></span>
+                  <span class="border-none"><b><%= property.city %></b> <span>City</span></span>
+                </div>         
+              </div>
+            </div>
+          </a>
+        <% }); %>
+      </div>
+       
+      <!-- Pagination -->
+      <div class="pagination-area text-center mt-4" style="margin-bottom:32px">
+        <ul class="pagination">
+          <% if (currentPage > 1) { %>
+            <li class="page-item">
+              <a class="page-link" 
+                 href="?search=<%= search %>&sort=<%= sort %>&state=<%= state %>&city=<%= city %>&page=<%= currentPage - 1 %>">
+                <i class="la la-angle-double-left"></i>
+              </a>
+            </li>
+          <% } %>
+
+          <% for (let i = 1; i <= totalPages; i++) { %>
+            <li class="page-item <%= i === currentPage ? 'active' : '' %>">
+              <a class="page-link" 
+                 href="?search=<%= search %>&sort=<%= sort %>&state=<%= state %>&city=<%= city %>&page=<%= i %>">
+                <%= i %>
+              </a>
+            </li>
+          <% } %>
+
+          <% if (currentPage < totalPages) { %>
+            <li class="page-item">
+              <a class="page-link" 
+                 href="?search=<%= search %>&sort=<%= sort %>&state=<%= state %>&city=<%= city %>&page=<%= currentPage + 1 %>">
+                <i class="la la-angle-double-right"></i>
+              </a>
+            </li>
+          <% } %>
+        </ul>
+      </div> 
+    </div>
+  </div>
+</div>
 
 <%- include('../partials/frontend/footer') %>
