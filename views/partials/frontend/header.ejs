@@ -32,10 +32,31 @@
     .post-property.btn {
     display: none;
   }
+  .hide-desktop{
+    display: none !important;
+  }
 }
-  
+
+
+  @media only screen and (max-width: 768px) {
+.social-area{
+    display: none !important;
+}
+
+  }
   
      </style>
+     
+        
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (window.innerWidth <= 768) {
+      document.querySelectorAll('.social-area').forEach(el => el.remove());
+    }
+  });
+</script>
+
+
 <body>
 
     <!-- preloader area start -->
@@ -83,21 +104,21 @@
 
                             
                            <% if (user && user.role === 'buyer') { %>
-    <li>
+    <li class="hide-desktop">
         <a  style="background-color: #ff4700fc;"  class="post-property btn btn-base" href="/logout">
             <span class="btn-icon"><i   style="background-color: #ff4700fc;"   class="fa fa-plus"></i></span> 
             <span class="btn-text">Logout</span>
         </a>
     </li>
 <% } else if (user && (user.role === 'seller')) { %>
-    <li>
+    <li class="hide-desktop">
         <a class="post-property btn btn-base" href="/seller/post-property">
             <span class="btn-icon"><i class="fa fa-plus"></i></span> 
             <span class="btn-text">Dashboard</span>
         </a>
     </li>
 <% } else if (user && (user.role === 'admin')) { %>
-    <li>
+    <li class="hide-desktop">
         <a class="post-property btn btn-base" href="/admin/create-properties">
             <span class="btn-icon"><i class="fa fa-plus"></i></span> 
             <span class="btn-text">Dashboard</span>
@@ -105,13 +126,9 @@
     </li>
 <% }
 else { %>
-  
-    <style>
-        .mobile-res{
-            display: none !important;
-        }
-    </style>
-    <li class="mobile-res">
+    <!-- Guest or role undefined -->
+     
+    <li class="hide-desktop">
         <a class="post-property btn btn-base" href="/login">
             <span class="btn-icon"><i class="fa fa-plus"></i></span> 
             <span class="btn-text">POST PROPERTY</span>
@@ -210,14 +227,14 @@ else { %>
     </li>
 <% } else if (user && (user.role === 'seller')) { %>
     <li>
-        <a class="btn btn-base" href="/seller/post-property">
+        <a class="post-property btn btn-base" href="/seller/post-property">
             <span class="btn-icon"><i class="fa fa-plus"></i></span> 
             <span class="btn-text">Dashboard</span>
         </a>
     </li>
 <% } else if (user && (user.role === 'admin')) { %>
     <li>
-        <a class="btn btn-base" href="/admin/create-properties">
+        <a class="post-property btn btn-base" href="/admin/create-properties">
             <span class="btn-icon"><i class="fa fa-plus"></i></span> 
             <span class="btn-text">Dashboard</span>
         </a>
