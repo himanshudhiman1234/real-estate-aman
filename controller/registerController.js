@@ -127,8 +127,9 @@ const verifyOtp = async (req, res) => {
 
 
 const forgotPassword = (req,res) =>{
-
-    res.render("forget-password")
+  const success = req.query.success === '1';
+  const error = req.query.error || null;
+  res.render("forget-password", { success, error });
 }
 
 const forgetPassword = async (req,res )=>{
@@ -166,7 +167,7 @@ const forgetPassword = async (req,res )=>{
       html: `<p>Click <a href="${resetURL}">here</a> to reset your password.</p>`,
     });
   
-    res.redirect("/forgot-password");
+    res.redirect("/forgot-password?success=1");
   
 }
 
