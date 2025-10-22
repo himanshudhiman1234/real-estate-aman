@@ -23,6 +23,7 @@ const property = async (req,res) =>{
     const Lands = await LandType.find({}) 
     res.render("seller/postProperty",{Lands})
 }
+
 const submitProperty = async (req, res) => {
     try {
         const {
