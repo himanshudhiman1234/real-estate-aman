@@ -62,7 +62,7 @@ const submitRequirement = async (req, res) => {
       const showRequirement = await Property.find({city:city,state:state}).sort({createdAt : -1})
 
       return res.render("frontend/post-requirement", {
-        message: "Requirement submitted successfully",
+        message: "Requirement submitted successfully.you will received match property soon.",
         error: null,
         showRequirement : showRequirement||  [],
       });

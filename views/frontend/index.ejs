@@ -25,6 +25,10 @@ display: none;
 font-size: 23px !important;    
 }
    }
+
+   select.form-control:not([size]):not([multiple]) {
+    height: calc(2.25rem + 14px)  !important;
+}
 </style>
     <!-- navbar end -->
     
@@ -110,6 +114,57 @@ font-size: 23px !important;
 
                             </div>
                         </form>
+
+                        <style>
+                            .requirement-btn {
+  list-style: none;
+  margin: 10px 0;
+}
+
+.requirement-btn a {
+  display: block;
+  background: linear-gradient(90deg, #5ba600, #6ecb00);
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+  padding: 12px 15px;
+  border-radius: 6px;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+/* Hover animation */
+.requirement-btn a:hover {
+  background: linear-gradient(90deg, #6ecb00, #5ba600);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
+  text-decoration: none;
+}
+
+/* Optional active click effect */
+.requirement-btn a:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: 786px) {
+  .mobile-post-requirement {
+    display: none;
+  }
+}
+
+                        </style>
+                        <div class="mobile-post-requirement">
+
+    <li style="margin:3px;list-style:none;">
+  <a href="/post-requirement"
+     style="display:block; background-color:#5ba600; padding:12px 12px; color:#fff; text-decoration:none; border-radius:4px;text-align: center;">
+   +  Post your requirement
+  </a>
+</li>
+                        </div>
+
                     </div>
                 </div>
             </div>

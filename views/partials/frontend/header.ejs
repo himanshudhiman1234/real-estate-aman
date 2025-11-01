@@ -52,7 +52,42 @@
 }
 
   }
+
+  .requirement a{
+color: white;
+  } 
+
+  .requirement a {
+    background-color: #5ba600 !important;
+    color: #ffff !important;
+}
+
+.requirement a:hover {
+    background-color: #5ba600 !important;
+    color: #ffff !important;
+    opacity: 0.9; /* Optional: slight opacity change on hover */
+}
+.breadcrumb-inner .section-title h2.page-title {
+    margin-top: 30px;
+}
+.post-requirement-mobile {
+  display: none;
+}
+
+/* Show only on larger screens (above 786px) */
+@media (max-width: 786px) {
+  .post-requirement-mobile {
+    display: none !important;
+  }
   
+}
+@media (max-width: 786px) {
+
+.navbar-top .topbar-right li {
+    border: none !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.9);
+}
+}
      </style>
      
         
@@ -220,7 +255,14 @@ else { %>
                             </ul> -->
                         <!-- </li> -->
                         <li><a href="/contact">Contact</a></li>
-                        <li style="background-color: red;margin:10px;padding: 5px;"><a href="/contact">Post your requirement</a></li>
+                       
+                        <li style="margin:10px; list-style:none;" class="post-requirement-mobile">
+  <a href="/post-requirement"
+     style="display:block; background-color:#5ba600; padding:8px 12px; color:#fff; text-decoration:none; border-radius:4px;">
+    Post your requirement
+  </a>
+</li>
+
                     </ul>
                 </div>
                 <div class="nav-right-part nav-right-part-desktop">
