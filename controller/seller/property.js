@@ -40,6 +40,18 @@ const submitProperty = async (req, res) => {
        console.log("userIDDD",userId)
         const images = req.files;
 
+        const MAX_SIZE = 500 * 1024;
+        const oversized = images.find(img => img.size > MAX_SIZE);
+
+      if (oversized) {
+        const Lands = await LandType.find({});
+        return res.render("seller/postProperty", { 
+          error: `"${oversized.originalname}" is larger than 500 KB. Please upload smaller images.`,
+          Lands 
+        });
+      }
+
+      
        const imageFile = images.map((image) => image.path); // <-- path has the secure_url
 
        
@@ -59,6 +71,7 @@ const submitProperty = async (req, res) => {
         return res.status(500).json({ message: "Error while saving property", error });
     }
 };
+
 
 const editProperty = async (req,res) =>{
     

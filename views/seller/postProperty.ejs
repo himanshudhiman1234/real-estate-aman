@@ -159,7 +159,7 @@
                                      
                                       <div class="mb-3">
                                         <label>Full Address</label>
-                                        <textarea class="form-control" name="address" rows="2"></textarea>
+                                        <textarea class="form-control" name="address" rows="2" required></textarea>
                                       </div>
                                       <div class="mb-3">
                                         <label>Pincode</label>
@@ -173,7 +173,8 @@
                                       </div>
                                       <div class="mb-3">
                                         <label>Phone Number</label>
-                                        <input class="form-control" type="text" name="phone" required>
+                                        <input class="form-control" type="text" pattern="[0-9]{10}"  maxlength="10" name="phone"     title="Please enter a 10-digit phone number"
+ required>
                                       </div>
                                       <div class="mb-3">
                                         <label>Email</label>
@@ -181,7 +182,10 @@
                                       </div>
                                     </div>
                                   </div>
-                              
+                              <% if (typeof error !== 'undefined') { %>
+  <div class="alert alert-danger"><%= error %></div>
+<% } %>
+
                            <button type="submit" class="btn btn-primary mt-4">Submit Property</button>
                                 </form>
                               </div>
