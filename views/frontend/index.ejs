@@ -319,6 +319,7 @@ font-size: 23px !important;
 }
 
 </style>
+
     <!-- video area end -->
 
     <!-- product area start -->
@@ -406,7 +407,7 @@ font-size: 23px !important;
                                         <li><img src="/frontend/img/icon/location2.png"  loading="lazy" alt="img"><%= property.state %> </li>
                                         <li><a href="/property-details/<%= property._id %>">For Sell</a></li>
                                     </ul>
-                                    <p><%=property.description %>.</p>
+                                    <p><%= property.description.split(' ').slice(0, 20).join(' ') %>....</p>
                                 </div>
                                    
                             </div>

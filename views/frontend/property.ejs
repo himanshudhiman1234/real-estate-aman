@@ -1,5 +1,9 @@
 <%- include('../partials/frontend/header') %>
-
+<style>
+  select.form-control:not([size]):not([multiple]) {
+    height: calc(2.25rem + 20px);
+}
+</style>
 <div class="breadcrumb-area bg-overlay-2" style="background-image:url('/images/baner-image.png')">
   <div class="container">
     <div class="breadcrumb-inner">
@@ -38,7 +42,7 @@
 
             <div class="col-md-3 mt-2 mt-md-0 align-self-center">
               <div class="single-select-inner">
-                <select name="sort" onchange="this.form.submit()">
+                <select name="sort" class="form-control" onchange="this.form.submit()">
                   <option value="">Sort By</option>
                   <option value="asc" <%= sort === 'asc' ? 'selected' : '' %>>Price: Low to High</option>
                   <option value="desc" <%= sort === 'desc' ? 'selected' : '' %>>Price: High to Low</option>

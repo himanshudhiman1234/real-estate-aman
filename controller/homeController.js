@@ -4,7 +4,7 @@ const nodemailer = require('nodemailer');
 
 const index = async(req,res) =>{
     const properties = await Property.find({status:1}).limit(3)
-    const property = await Property.find({status:1});
+    const property = await Property.find({status:1}).sort({createdAt:-1});
     
 
     const Land = await LandType.find({})

@@ -96,7 +96,9 @@ select.form-control {
   position: static !important;
 }
 
-
+select.form-control:not([size]):not([multiple]) {
+    height: calc(2.25rem + 15px);
+}
     /* Make dropdown appear above everything */
   </style>
 <script>
@@ -204,11 +206,24 @@ $(document).on('click', '.nice-select', function() {
                                 </label>
                             </div>
                             <div class="col-md-6">
-                                
-                                <label class="single-input-inner style-bg-border">
+                                                                
+                                <select name="price" class="form-control">
+                                    <option value="">Select your budget</option>
+                                    <option value="0lacs -10lacs">0lacs -10lacs</option>
+                                    <option value="10lacs -50lacs">10lacs -50lacs</option>
+                                    <option value="50lacs -80lacs">50lacs -80lacs</option>
+                                    <!-- <option value="5lacs -80lacs">5lacs -80lacs</option> -->
+                                    <option value="80lacs -1crores">80lacs -1crores</option>
+                                    <option value="1 - 1.5crores">1 - 1.5crores</option>
+                                    <option value="1.5 - 2.5crores">1.5 - 2.5crores</option>
+                                    <option value="2.5 - 5crores">2.5 - 5crores</option>
+                                    <option value="5 - 10 crores">5 - 10 crores</option>
+                                    <option value="above 10 crores">above 10 crores</option>
+                                </select>
+                                <!-- <label class="single-input-inner style-bg-border"></label>
                                     <input class="form-control" type="number" name="price" placeholder="Budget" required>
 
-                                </label>
+                                </label> -->
                             </div>
 
                             <div class="col-12">
