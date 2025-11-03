@@ -106,7 +106,7 @@
                                         <% } %>
                                       
                                       <label>Upload Property Images</label>
-                                      <input class="form-control" type="file" name="images" multiple accept=".jpg,.jpeg,.png">
+                                      <input class="form-control" type="file" name="images"  id="images"  multiple accept=".jpg,.jpeg,.png">
 
                                       <!-- <input class="form-control" type="file" name="images" multiple> -->
                                     </div>
@@ -390,6 +390,21 @@ $("#inputState").change(function(){
       }, 300); // delay to make sure DOM updates
     }
   });
+
+
+document.getElementById('images').addEventListener('change', function(event) {
+  const files = event.target.files;
+  const maxSize = 500 * 1024; // 500 KB
+
+  for (let i = 0; i < files.length; i++) {
+    if (files[i].size > maxSize) {
+      alert(`"${files[i].name}" is too large. Max size allowed is 500 KB.`);
+      event.target.value = ''; // Clear selected files
+      return; // Stop further processing
+    }
+  }
+});
+
 </script>
 
             <!-- End of Main Content -->
