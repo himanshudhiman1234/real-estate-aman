@@ -46,7 +46,7 @@ app.set("view engine","ejs")
 app.set("views",path.join(__dirname,"views"))
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
 app.use("/",register)
 app.use("/",login)
 
