@@ -72,7 +72,7 @@ const property = async(req,res)=>{
 const propertyDetails = async(req,res) =>{
     const propertyId = req.params.id;
     const property = await Property.findById(propertyId)
-
+    console.log("properyies",property)
     res.render("frontend/property-details",{property})
 }
 
@@ -156,4 +156,68 @@ const accessdenied = (req,res) =>{
     res.render("access-denied")
 }
 
-module.exports = {index,property,propertyDetails,propertyByCollection,about,contact,privacyPolicy,submitContact,termsCondition,accessdenied}
+const requestCallback = async (req, res) => {
+  try {
+    const propertyId = req.params.id;
+    const property = await Property.findById(propertyId);
+    const user = req.user; // must contain logged-in user details
+
+    // ✅ Send instant response so UI doesn't wait
+    res.json({ success: true, message: "Your request has been sent to the seller!" });
+
+    // Now, send emails asynchronously (non-blocking)
+    const adminEmail = "admin@example.com";
+
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+      }
+    });
+
+    const sellerMail = {
+      from: process.env.EMAIL_USER,
+      to: property.email,
+      subject: `Someone is interested in your property: ${property.title}`,
+      html: `
+        <h3>Hello ${property.sellerName},</h3>
+        <p>Someone is interested in your property <b>${property.title}</b>.</p>
+        <p>Please reach out to them:</p>
+        <ul>
+          <li><b>Email:</b> ${user.email}</li>
+          <li><b>Phone:</b> ${user.phone}</li>
+        </ul>
+        <br><p>Thank you,<br>Property Portal Team</p>
+      `
+    };
+
+    const adminMail = {
+      from: process.env.EMAIL_USER,
+      to: process.env.EMAIL_USER,
+      subject: `Callback Request for ${property.title}`,
+      html: `
+        <h3>New Callback Request</h3>
+        <p><b>Property:</b> ${property.title}</p>
+        <p><b>Seller:</b> ${property.sellerName} (${property.email})</p>
+        <hr>
+        <p><b>Interested Buyer Details:</b></p>
+        <ul>
+          <li><b>Email:</b> ${user.email}</li>
+          <li><b>Phone:</b> ${user.phone}</li>
+        </ul>
+      `
+    };
+
+    // 💨 Send both emails asynchronously
+    transporter.sendMail(sellerMail).catch(console.error);
+    transporter.sendMail(adminMail).catch(console.error);
+
+  } catch (err) {
+    console.error("Error sending callback request:", err);
+  }
+};
+
+
+
+module.exports = {index,property,propertyDetails,propertyByCollection,about,contact,privacyPolicy,submitContact,termsCondition,accessdenied,requestCallback}
