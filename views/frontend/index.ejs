@@ -389,10 +389,10 @@ font-size: 23px !important;
                                 <div class="thumb">
 
                                                     <% if (property.images && property.images.length > 0 && property.images[0]) { %>
-    <img src="<%= property.images[0] %>" alt="img" loading="lazy">
-<% } else { %>
-    <img src="/frontend/img/banner/1.jpg" alt="img" loading="lazy">
-<% } %>
+        <img src="<%= property.images[0] %>" alt="img" loading="lazy">
+    <% } else { %>
+        <img src="/frontend/img/banner/1.jpg" alt="img" loading="lazy">
+    <% } %>
                                     <!-- <img src="/uploads/<%= property.images[0] %>" alt="img">  -->
                                     <div class="product-wrap-details">
                                         <div class="media">
@@ -401,7 +401,7 @@ font-size: 23px !important;
                                     </div> 
                                 </div> 
                                 <div class="product-details-inner">
-                                    <h4><%= property.title.substring(0, 30) %></h4>
+                                    <h4><%= property.title %></h4>
 </a></h4>
                                     <ul class="meta-inner">
                                         <li><img src="/frontend/img/icon/location2.png"  loading="lazy" alt="img"><%= property.state %> </li>
