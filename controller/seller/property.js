@@ -25,51 +25,112 @@ const property = async (req,res) =>{
 }
 
 const submitProperty = async (req, res) => {
-    try {
-        const {
-            title, description, state,country, city, price, area,propertytype,areameasure,
-            locality,address,pincode,sellerName,phone,email,listed_by
-        } = req.body;   
-          if( !title ||  !description ||  !state || !country || !city || !price || !area || !propertytype || !areameasure ||
-            locality || !address ||!pincode ||!sellerName || !phone||!email ||!listed_by){
-                 const Lands = await LandType.find({});
-      return res.render("seller/postProperty", { error: "All fields are required",Lands });
+  try {
+    const {
+      title, description, state, country, city, price,
+      area, propertytype, areameasure, locality,
+      address, pincode, sellerName, phone, email,
+      listed_by, category, projectname, plotarea,
+      areaunit, facing, roadwidth, possession,
+      totalfloor, bhk, superarea, carpetarea,areaunits
+    } = req.body;
 
-            }
-        const userId = req.user.id;
-       console.log("userIDDD",userId)
-        const images = req.files;
-
-        const MAX_SIZE = 500 * 1024;
-        const oversized = images.find(img => img.size > MAX_SIZE);
-
-      if (oversized) {
-        const Lands = await LandType.find({});
-        return res.render("seller/postProperty", { 
-          error: `"${oversized.originalname}" is larger than 500 KB. Please upload smaller images.`,
-          Lands 
-        });
-      }
-
-      
-       const imageFile = images.map((image) => image.path); // <-- path has the secure_url
-
-       
-        const property = new Property({
-            title, description, state,country, city, price,area,LandType:propertytype,
-            locality,address,pincode,sellerName,phone,email,areameasure,
-            images: imageFile,user_id: userId,listed_by
-        });
-
-        console.log("Property to save:", property);
-        const savedProperty = await property.save();
-    req.flash('success_msg', 'Property has been Added successfully');
-
-        res.redirect("/seller/dashboard")
-    } catch (error) {
-        console.error("Error while saving property:", error);
-        return res.status(500).json({ message: "Error while saving property", error });
+    // Common validation
+    if (
+      !title || !description || !state || !country || !city ||
+      !price || !address || !pincode ||
+      !sellerName || !phone || !email || !listed_by || !category
+    ) {
+      const Lands = await LandType.find({});
+      return res.render("seller/postProperty", {
+        error: "All common fields are required",
+        Lands
+      });
     }
+
+    // Category validation
+    if (category === "land" && (!propertytype || !areameasure || !area)) {
+      const Lands = await LandType.find({});
+      return res.render("seller/postProperty", {
+        error: "Land fields are required",
+        Lands
+      });
+    }
+
+    if (category === "plots" && (!plotarea || !facing || !roadwidth || !areaunits)) {
+      const Lands = await LandType.find({});
+      return res.render("seller/postProperty", {
+        error: "Plot fields are required",
+        Lands
+      });
+    }
+
+    if (category === "house" && (!plotarea || !bhk || !totalfloor || !areaunits)) {
+      const Lands = await LandType.find({});
+      return res.render("seller/postProperty", {
+        error: "House fields are required",
+        Lands
+      });
+    }
+
+    if (category === "flats" && (!projectname || !superarea || !carpetarea || !bhk)) {
+      const Lands = await LandType.find({});
+      return res.render("seller/postProperty", {
+        error: "Flat fields are required",
+        Lands
+      });
+    }
+
+    // Image handling
+    const images = req.files || [];
+    const imageFile = images.map(img => img.path);
+
+    // User id
+    const userId = req.user.id;
+
+    // Save data
+    const property = new Property({
+      title,
+      description,
+      state,
+      country,
+      city,
+      price,
+      area,
+      LandType: propertytype,
+      areameasure,
+      locality,
+      address,
+      pincode,
+      sellerName,
+      phone,
+      email,
+      listed_by,
+      category,
+      projectname,
+      plotarea,
+      areaunit,
+      facing,
+      roadwidth,
+      possession,
+      totalfloor,
+      bhk,
+      areaunits,
+      superarea,
+      carpetarea,
+      images: imageFile,
+      user_id: userId
+    });
+
+    await property.save();
+
+    req.flash("success_msg", "Property Added Successfully");
+    res.redirect("/seller/dashboard");
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Server Error");
+  }
 };
 
 
@@ -85,14 +146,16 @@ const editProperty = async (req,res) =>{
 
 const updateProperty = async (req, res) => {
   try {
-    req.body.negotiable = req.body.negotiable === "on";
+    const PropertyId = req.params.id;
 
     const {
-      title, description, state, country, city, price, area, propertytype, areameasure,
-      locality, address, pincode, sellerName, phone, email, listed_by
+      title, description, state, country, city, price,
+      area, propertytype, areameasure, locality,
+      address, pincode, sellerName, phone, email,
+      listed_by, category, projectname, plotarea,
+      areaunit, facing, roadwidth, possession,
+      totalfloor, bhk, superarea, carpetarea, areaunits
     } = req.body;
-
-    const PropertyId = req.params.id;
 
     const data = {
       title,
@@ -111,21 +174,36 @@ const updateProperty = async (req, res) => {
       phone,
       email,
       listed_by,
-      negotiable: req.body.negotiable,
+      category,
+      projectname,
+      plotarea,
+      areaunit,
+      facing,
+      roadwidth,
+      possession,
+      totalfloor,
+      bhk,
+      areaunits,
+      superarea,
+      carpetarea,
     };
 
-    // 🟡 If files exist, then add images to the update
+    // images update (replace old ones if new uploaded)
     if (req.files && req.files.length > 0) {
       data.images = req.files.map(file => file.path);
     }
 
-    const updatedProperty = await Property.findByIdAndUpdate(PropertyId, data, { new: true });
+    const updatedProperty = await Property.findByIdAndUpdate(
+      PropertyId,
+      data,
+      { new: true, runValidators: true }
+    );
 
     if (!updatedProperty) {
       return res.status(404).send("Property not found");
     }
 
-    req.flash('success_msg', 'Property has been updated successfully');
+    req.flash("success_msg", "Property updated successfully");
     res.redirect("/seller/dashboard");
 
   } catch (error) {

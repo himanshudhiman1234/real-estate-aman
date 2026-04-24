@@ -51,14 +51,13 @@
                     <% }); %>
                    
                 </div>
-                <div class="product-thumbnail-carousel">
-                    <% property.images.forEach(property => { %>  
-                    <div class="single-thumbnail-item">
-                        <img src="<%= property %>" alt="img">
-                    </div>
-                    <% }); %>
-
-                </div>
+               <div class="product-thumbnail-carousel">
+   <% (property.images && property.images.length ? property.images : ['/frontend/img/banner/1.jpg']).forEach(img => { %>
+    <div class="single-thumbnail-item">
+        <img src="<%= img %>" alt="img">
+    </div>
+<% }) %>
+</div>
             </div>
         </div>
         <div class="row">
@@ -72,8 +71,32 @@
                             <div class="col-md-6">
                                 <ul>
                                     <li>Land Type: <%= property.LandType %></li>
-                                    <li>Area Measure: <%= property.areameasure %></li>
-                                    <li>Area: <%= property.area %></li>
+
+                                    <% if (property.category == "flats") { %>
+
+<li>Super Area: <%= property.superarea %> Sqft</li>
+<li>Carpet Area: <%= property.carpetarea %>< Sqft/li>
+<li>Project Name: <%= property.projectname %></li>
+
+
+                                    <% } %>
+                                      <% if (property.category == "flats" || property.category == "house") { %>
+                                        <li>BHK: <%= property.bhk %>BHK</li>
+
+                                    <% } %>
+
+
+                                      <% if (property.category == "flats" || property.category == "plots" || property.category == "house") { %>
+                                        <li>Road Width: <%= property.roadwidth %></li>
+                                        <li>Posession: <%= property.possession %></li>
+
+
+                    <% } else { %>
+              <li>Area Measure: <%= property.areameasure %></li>
+                <li>Area: <%= property.area %></li>
+
+                  <% } %>
+                                    
                                     <li>State:  <%= property.state %></li>
                                     <li>Listed By:  <%= property.listed_by %></li>
 
@@ -82,6 +105,16 @@
                             </div>
                             <div class="col-md-6">
                                 <ul>
+
+                                      <% if (property.category == "flats" || property.category == "house") { %>
+                                        <li>Total Floor: <%= property.totalfloor %></li>
+                                
+                    <% } %>
+
+                          <% if (property.category == "plots" || property.category == "house") { %>
+                                        <li>Total Area: <%= property.plotarea %> <%= property.areaunits %></li>                            
+                    <% } %>
+
                                     <li>City: <%= property.city %> </li>
                                     <li>Address: <%= property.address %></li>
                                     <li>Pincode: <%= property.pincode %></li>
@@ -94,7 +127,10 @@
   } else {
     return price.toLocaleString('en-IN'); // fallback
   }
-} %>
+} 
+                  const perUnitPrice = property.area > 0 ? property.price / property.area : 0;
+
+%>
 
 <li>Price : ₹ <%= formatIndianPrice(property.price) %></li>
 

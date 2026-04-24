@@ -2,21 +2,92 @@ const Property = require("../models/property")
 const LandType = require("../models/landType")
 const nodemailer = require('nodemailer');
 
-const index = async(req,res) =>{
-    const properties = await Property.find({status:1}).limit(3)
-    const property = await Property.find({status:1}).sort({createdAt:-1});
-    
+const index = async (req, res) => {
+    try {
+        const page = parseInt(req.query.page) || 1;
+        const limit = 12;
+        const skip = (page - 1) * limit;
 
-    const Land = await LandType.find({})
-    // console.log(Land)
+        const properties = await Property.find({ status: 1,category: "land"}).limit(3);
 
-    res.render("frontend/index",{
-         title: "Land for Sale in India – Buy Agriculture, Farm & Residential Plots | ZameenSale",
-        description: "Find verified agriculture, farm, and residential land for sale in India. Explore Haryana, Punjab, and NCR plots. Best land deals 2025.",
-        keywords: "Land for Sale, Agriculture Land, Farm Land, Residential Plots",
-        properties,Land,property})
-}
+        const latestProperties = await Property.find({ status: 1,category:"land" })
+            .sort({ createdAt: -1 })
+            .skip(skip)
+            .limit(limit);
 
+            console.log("land",latestProperties)
+
+
+        const totalProperties = await Property.countDocuments({ status: 1 ,category: "land"});
+        const totalPages = Math.ceil(totalProperties / limit);
+
+        const Land = await LandType.find({});
+
+        res.render("frontend/index", {
+            title: "Land for Sale in India – Buy Agriculture, Farm & Residential Plots | ZameenSale",
+            description: "Find verified agriculture, farm, and residential land for sale in India. Explore Haryana, Punjab, and NCR plots. Best land deals 2025.",
+            keywords: "Land for Sale, Agriculture Land, Farm Land, Residential Plots",
+
+            properties,
+            Land,
+            property: latestProperties,
+
+            currentPage: page,
+            totalPages
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Server Error");
+    }
+};
+
+const propertylist = async (req, res) => {
+  try {
+    const category = req.query.category || "";
+    const search = req.query.search || "";
+    const sort = req.query.sort || "";
+
+    const filter = {};
+
+    if (category) {
+      filter.category = category;
+    }
+
+    if (search) {
+      filter.$or = [
+        { title: { $regex: search, $options: "i" } },
+        { city: { $regex: search, $options: "i" } },
+        { state: { $regex: search, $options: "i" } },
+        { locality: { $regex: search, $options: "i" } },
+        { address: { $regex: search, $options: "i" } }
+      ];
+    }
+
+    let sortOption = { createdAt: -1 };
+
+    if (sort === "asc") {
+      sortOption = { price: 1 };
+    }
+
+    if (sort === "desc") {
+      sortOption = { price: -1 };
+    }
+
+    const properties = await Property.find(filter).sort(sortOption);
+
+    res.render("frontend/property-categories", {
+      properties,
+      category,
+      search,
+      sort
+    });
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Server Error");
+  }
+};
 
 const property = async(req,res)=>{
     const search = req.query.search || "";
@@ -58,7 +129,7 @@ const property = async(req,res)=>{
     const totalCount = await Property.countDocuments(query);
 
     const totalPages = Math.ceil(totalCount / limit);
-
+    
     res.render("frontend/property", { properties,
         search,
         sort,
@@ -220,4 +291,5 @@ const requestCallback = async (req, res) => {
 
 
 
-module.exports = {index,property,propertyDetails,propertyByCollection,about,contact,privacyPolicy,submitContact,termsCondition,accessdenied,requestCallback}
+module.exports = {index,property,propertyDetails,propertyByCollection,about,
+    contact,privacyPolicy,submitContact,termsCondition,accessdenied,requestCallback,propertylist}

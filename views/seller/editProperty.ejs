@@ -1,5 +1,96 @@
 <%- include('../partials/seller/navbar') %>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const category = document.getElementById("categories");
 
+  const fields = {
+    landType: document.getElementById("land-type"),
+    areaType: document.getElementById("area-measure"),
+    plotArea: document.getElementById("plotarea"),
+    facing: document.getElementById("facing"),
+    roadwidth: document.getElementById("roadwidth"),
+    posession: document.getElementById("posession"),
+    totalFloor: document.getElementById("totalfloor"),
+    BHK: document.getElementById("BHK"),
+    projectname: document.getElementById("projectname"),
+    superarea: document.getElementById("superarea"),
+    carpetarea: document.getElementById("carpetarea"),
+    areaBox: document.querySelector(".area")
+  };
+
+  function hideField(el) {
+    if (!el) return;
+
+    el.style.display = "none";
+
+    // ❌ disable + remove required from hidden fields (IMPORTANT FIX)
+    el.querySelectorAll("input, select, textarea").forEach(input => {
+      input.disabled = true;
+      input.required = false;
+    });
+  }
+
+  function showField(el) {
+    if (!el) return;
+
+    el.style.display = "block";
+
+    // ✅ enable fields again
+    el.querySelectorAll("input, select, textarea").forEach(input => {
+      input.disabled = false;
+    });
+  }
+
+  function hideAll() {
+    Object.values(fields).forEach(field => hideField(field));
+  }
+
+  function updateForm() {
+    hideAll();
+
+    const value = category.value;
+
+    if (value === "plots") {
+      showField(fields.plotArea);
+      showField(fields.facing);
+      showField(fields.roadwidth);
+      showField(fields.posession);
+    }
+
+    else if (value === "house") {
+      showField(fields.plotArea);
+      showField(fields.facing);
+      showField(fields.roadwidth);
+      showField(fields.posession);
+      showField(fields.totalFloor);
+      showField(fields.BHK);
+    }
+
+    else if (value === "flats") {
+      showField(fields.facing);
+      showField(fields.roadwidth);
+      showField(fields.posession);
+      showField(fields.projectname);
+      showField(fields.superarea);
+      showField(fields.carpetarea);
+      showField(fields.totalFloor);
+      showField(fields.BHK);
+    }
+
+    else {
+      showField(fields.landType);
+      showField(fields.areaType);
+      showField(fields.areaBox);
+    }
+  }
+
+  // initial load
+  updateForm();
+
+  // on change
+  category.addEventListener("change", updateForm);
+});
+</script>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -24,10 +115,41 @@
                                     <!-- Column 1 -->
                                     <div class="col-md-6">
                                       <div class="mb-3">
+  <label>Category</label>
+  <input type="text" class="form-control" value="<%= property.category %>" readonly>
+  <input type="hidden" id="categories" value="<%= property.category %>">
+</div>
+                                      <div class="mb-3">
                                         <label>Property Title</label>
                                         <input class="form-control" type="text" value="<%= property.title %>" name="title" required>
 
                                           </div>
+
+                                                             <div class="mb-3" id="projectname" style="display: none;">
+                                        <label>Project Name</label>
+                                        <input class="form-control"  value="<%= property.projectname %>" ="text" name="projectname" required>
+                                      </div>
+
+                                      <div class="mb-3"  id="plotarea"  style="display: none;">
+  <label> Area</label>
+
+  <div style="display:flex; gap:10px;">
+    <input 
+      class="form-control" 
+      type="number" 
+      name="plotarea" 
+      placeholder="Enter area"
+      value="<%= property.plotarea %>"
+      required
+    >
+
+    <select class="form-control" name="areaunits" id="areaUnit" style="max-width:150px;">
+      <option value="sqyard"  <%= property.areaunits === "sqyard" ? "selected" : "" %>>Sq Yard</option>
+      <option value="kanal" <%= property.areaunits === "kanal" ? "selected" : "" %>>Kanal</option>
+      <option value="sqft"  <%= property.areaunits === "sqft" ? "selected" : "" %>>Sq Ft</option>
+    </select>
+  </div>
+</div>
                                       <div class="mb-3">
                                         <label>Description</label>
                                         <textarea class="form-control" name="description" rows="4" required><%= property.description %></textarea>
@@ -123,7 +245,7 @@
                               
                                     <!-- Column 2 -->
                                     <div class="col-md-6">
-                                      <div class="mb-3">
+                                      <div class="mb-3" id="land-type">
                                         <label>Land Type</label>
                                         
                                         <select class="form-control property-type" name="propertytype" required>
@@ -138,7 +260,7 @@
 
                                         </select>
                                       </div>
-                                      <div class="mb-3">
+                                      <div class="mb-3"  id="area-measure">
                                         <label>Land Area Measurement</label>
                                         <select class="form-control area-type" name="areameasure" required>
                                           <option value="">--Select Area Measurement--</option>
@@ -158,6 +280,106 @@
                                         <label>country</label>
                                         <input class="form-control" type="text" name="country" value="India"  required readonly>
                                       </div>
+
+                                         <div class="mb-3"  id="facing" style="display: none;">
+  <label>Facing</label>
+
+  <div style="display:flex;">
+   
+    <select class="form-control" name="facing" id="areaUnit" >
+  <option value="">Select Facing</option>
+  <option value="north"  <%= property.facing === "north" ? "selected" : "" %> >North</option>
+  <option value="south"  <%= property.facing === "south" ? "selected" : "" %>>South</option>
+  <option value="east"  <%= property.facing === "east" ? "selected" : "" %>>East</option>
+  <option value="west"  <%= property.facing === "west" ? "selected" : "" %>>West</option>
+    </select>
+  </div>
+</div>
+
+ <div class="mb-3"  id="roadwidth" style="display: none;">
+  <label>Road  Width</label>
+
+  <div style="display:flex;">
+   
+  
+<input 
+  class="form-control"
+  type="number"
+  name="roadwidth"
+  maxlength="10"
+  value="<%= property.roadwidth %>"
+  pattern="[0-9]{1,10}"
+  required
+>
+                                   
+  </div>
+</div>
+
+<div class="mb-3" id="posession" style="display:none;">
+  <label class="form-label">Possession</label>
+
+  <div class="possession-toggle">
+    <input type="radio" name="possession" id="ready" value="readytomove"   <%= property.possession === 'readytomove' ? 'checked' : '' %>>
+    <label for="ready">Ready to Move</label>
+
+    <input type="radio" name="possession" id="under" value="underconstruction"   <%= property.possession === 'underconstruction' ? 'checked' : '' %>>
+    <label for="under">Under Construction</label>
+  </div>
+</div>
+
+<div class="mb-3"  id="totalfloor" style="display: none;">
+  <label>Total Floor</label>
+
+  <div style="display:flex;">
+   
+  
+  <select class="form-control" name="totalfloor" id="areaUnit" >
+  <option value="">Select Floor</option>
+  <option value="1" <%= property.totalfloor === "1" ? "selected" : "" %>>1</option>
+  <option value="2" <%= property.totalfloor === "2" ? "selected" : "" %>>2</option>
+  <option value="3" <%= property.totalfloor === "3" ? "selected" : "" %>>3</option>
+  <option value="4" <%= property.totalfloor === "4" ? "selected" : "" %>>4</option>
+  <option value="5" <%= property.totalfloor === "5" ? "selected" : "" %>>5+</option>
+
+
+    </select>
+                                   
+  </div>
+</div>
+
+
+<div class="mb-3"  id="BHK" style="display: none;">
+  <label>BHK</label>
+
+  <div style="display:flex;">
+   
+  
+  <select class="form-control" name="bhk" id="areaUnit" >
+  <option value="">Select Facing</option>
+  <option value="1" <%= property.bhk === "1" ? "selected" : "" %>>1</option>
+  <option value="2" <%= property.bhk === "2" ? "selected" : "" %>>2</option>
+  <option value="3" <%= property.bhk === "3" ? "selected" : "" %>>3</option>
+  <option value="4" <%= property.bhk === "4" ? "selected" : "" %>>4</option>
+  <option value="5" <%= property.bhk === "5" ? "selected" : "" %>>5+</option>
+  
+
+
+    </select>
+                                   
+  </div>
+</div>
+
+<div class="mb-3" id="superarea">
+                                        <label>Super Area</label>
+                                        <input class="form-control" type="number"  type="text"   value="<%= property.superarea %>" name="superarea" required>
+                                      </div>
+
+                                      <div class="mb-3" id="carpetarea">
+                                        <label>Carpet Area</label>
+                                        <input class="form-control" type="number"  type="text" value="<%= property.carpetarea %>" name="carpetarea" required>
+                                      </div>
+                         
+
                                      
                                       <div class="mb-3">
                                         <label>Full Address</label>
@@ -393,7 +615,42 @@ $("#inputState").change(function(){
 
 
 </script>
+<style>
+  .possession-toggle{
+  display:flex;
+  background:#f1f3f5;
+  border-radius:12px;
+  padding:4px;
+  gap:4px;
+  overflow:hidden;
+}
 
+.possession-toggle input{
+  display:none;
+}
+
+.possession-toggle label{
+  flex:1;
+  text-align:center;
+  padding:10px 14px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:600;
+  transition:0.3s ease;
+  color:#555;
+}
+
+.possession-toggle input:checked + label{
+  background:#0d6efd;
+  color:#fff;
+  box-shadow:0 4px 10px rgba(13,110,253,0.25);
+}
+
+.possession-toggle label:hover{
+  background:#e9ecef;
+}
+
+</style>
             <!-- End of Main Content -->
 
 <%- include('../partials/seller/footer') %>

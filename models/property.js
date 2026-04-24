@@ -12,8 +12,41 @@ const propertySchema = new mongoose.Schema({
       // },
       LandType: {
         type: String,
-        type: String,
         required: true
+      },
+      category:{
+        type:String
+      },
+      projectname:{
+        type:String
+      },
+      areaunits:{
+        type:String
+      },
+      plotarea:{
+        type:String,
+      },
+      facing :{
+        type:String
+      },
+      roadwidth:{
+        type:String
+      },
+      possession:{
+        type:String
+      },
+      totalfloor:{
+        type:String
+      },
+      bhk:{
+        type:String
+      },
+      superarea:{
+        type:String
+      },
+      carpetarea:{
+        type:String
+
       },
       description: {
         type: String,
@@ -21,11 +54,9 @@ const propertySchema = new mongoose.Schema({
       },
       areameasure:{
         type:String,
-        required:true
       },
       area:{
         type:String,
-        required:true
       },
       // Location Info
       country: {

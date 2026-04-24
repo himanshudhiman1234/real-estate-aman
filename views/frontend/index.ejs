@@ -29,6 +29,131 @@ font-size: 23px !important;
    select.form-control:not([size]):not([multiple]) {
     height: calc(2.25rem + 14px)  !important;
 }
+
+.section{
+  width:90%;
+  margin:50px auto;
+}
+
+.heading{
+  text-align:center;
+  font-size:34px;
+  font-weight:700;
+  color:#1f2d3d;
+  margin-bottom:40px;
+  position:relative;
+}
+
+.heading::before,
+.heading::after{
+  content:"";
+  position:absolute;
+  top:50%;
+  width:80px;
+  height:2px;
+  background:#6bbf3d;
+}
+
+.heading::before{
+  left:28%;
+}
+
+.heading::after{
+  right:28%;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+
+.card{
+  border-radius:12px;
+  padding:25px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  transition:0.3s ease;
+  border:1px solid #e2e2e2;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+.icon{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:40px;
+  color:#fff;
+  margin-bottom:18px;
+}
+
+.card h3{
+  font-size:30px;
+  margin-bottom:10px;
+  color:#222;
+}
+
+.card p{
+  font-size:16px;
+  color:#555;
+  line-height:1.5;
+  margin-bottom:18px;
+}
+
+.btn{
+  padding:12px 22px;
+  border:none;
+  border-radius:6px;
+  color:#fff;
+  font-size:15px;
+  cursor:pointer;
+}
+
+.cat .btn {
+  padding: 0px 22px !important;
+}
+
+/* Card Colors */
+.land{
+  background:#eef8ee;
+}
+.land .icon,
+.land .btn{
+  background:#2e8b2d;
+}
+
+.plots{
+  background:#fff8e8;
+}
+.plots .icon,
+.plots .btn{
+  background:#f4b400;
+}
+
+.flats{
+  background:#eef4ff;
+}
+.flats .icon,
+.flats .btn{
+  background:#1565c0;
+}
+
+.house{
+  background:#fff1f1;
+}
+.house .icon,
+.house .btn{
+  background:#e53935;
+}
 </style>
     <!-- navbar end -->
     
@@ -154,6 +279,25 @@ font-size: 23px !important;
   }
 }
 
+.view-btn{
+  display: inline-block;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #5ba600, #5ba600);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+}
+
+.view-btn:hover{
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.18);
+}
+
                         </style>
                         <div class="mobile-post-requirement">
 
@@ -214,8 +358,49 @@ font-size: 23px !important;
     </div>
     <!-- service end -->
 
+  <section class="section">
+  <h2 class="heading">Browse by Category</h2>
+
+  <div class="cards">
+
+    <div class="card land cat">
+      <div class="icon">🌿</div>
+      <h3>Land</h3>
+      <p>Agriculture Land, Farm Land, Commercial Land & More</p>
+      <a href="properties-category?category=land" class="btn">View Properties</a>
+    </div>
+
+    <div class="card plots cat">
+      <div class="icon">📋</div>
+      <h3>Plots</h3>
+      <p>Residential Plots, Commercial Plots, Gated Community Plots</p>
+      <a href="properties-category?category=plots" class="btn">View Properties</a>
+
+    </div>
+
+    <div class="card flats cat">
+      <div class="icon">🏢</div>
+      <h3>Flats</h3>
+      <p>1 BHK, 2 BHK, 3 BHK & Luxury Apartments Available</p>
+      <a href="properties-category?category=flats" class="btn">View Properties</a>
+    </div>
+
+    <div class="card house cat">
+      <div class="icon">🏠</div>
+      <h3>House</h3>
+      <p>Independent House, Villa, Duplex House & More</p>
+      <a href="properties-category?category=house" class="btn">View Properties</a>
+
+    </div>
+
+  </div>
+</section>
+
+
+
     <!-- product area start -->
-    <div class="product-area pd-top-118 pd-bottom-90">
+    <div class="product-area pd-top-40
+     pd-bottom-90">
         <div class="container">
             <div class="section-title text-center">
                 <!-- <h6>We are offering the best Deal</h6> -->
@@ -362,63 +547,83 @@ font-size: 23px !important;
    
     <!-- Propartes area start --> 
     <div class="propartes-area pd-top-40 pd-bottom-90">
-        <div class="container">
-            <div class="section-title text-center">
-                <!-- <h6>New Properties</h6> -->
-                <h2>New Properties</h2>
-            </div>
-            <div class="mgd-tab-inner text-center" > 
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item"  id="sellSection">
-                        <a class="nav-link active"  href="#sellSection" >Buy</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link"  href="/login" >Sell</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="rent1" role="tabpanel" aria-labelledby="rent1-tab">
-                    <div class="row">
-                <% property.forEach(property => { %>
-                        
+    <div class="container">
+
+        <div class="section-title text-center">
+            <h2>New Properties</h2>
+        </div>
+
+        <div class="mgd-tab-inner text-center"> 
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Buy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Sell</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tab-content">
+            <div class="tab-pane fade show active">
+
+                <div class="row">
+
+                    <% property.forEach(property => { %>
                         <div class="col-lg-4 col-md-6">
-                                                 <a href="/property-details/<%= property._id %>" > 
 
-                            <div class="single-product-wrap style-bottom">
-                                <div class="thumb">
+                            <a href="/property-details/<%= property._id %>">
 
-                                                    <% if (property.images && property.images.length > 0 && property.images[0]) { %>
-        <img src="<%= property.images[0] %>" alt="img" loading="lazy">
-    <% } else { %>
-        <img src="/frontend/img/banner/1.jpg" alt="img" loading="lazy">
-    <% } %>
-                                    <!-- <img src="/uploads/<%= property.images[0] %>" alt="img">  -->
-                                    <div class="product-wrap-details">
-                                        <div class="media">
-                                           
-                                        </div>
-                                    </div> 
-                                </div> 
-                                <div class="product-details-inner">
-                                    <h4><%= property.title %></h4>
-</a></h4>
-                                    <ul class="meta-inner">
-                                        <li><img src="/frontend/img/icon/location2.png"  loading="lazy" alt="img"><%= property.state %> </li>
-                                        <li><a href="/property-details/<%= property._id %>">For Sell</a></li>
-                                    </ul>
-                                    <p><%= property.description.split(' ').slice(0, 20).join(' ') %>....</p>
+                                <div class="single-product-wrap style-bottom">
+
+                                    <div class="thumb">
+                                        <% if (property.images && property.images.length > 0 && property.images[0]) { %>
+                                            <img src="<%= property.images[0] %>" alt="img" loading="lazy">
+                                        <% } else { %>
+                                            <img src="/frontend/img/banner/1.jpg" alt="img" loading="lazy">
+                                        <% } %>
+                                    </div>
+
+                                    <div class="product-details-inner">
+
+                                        <h4><%= property.title %></h4>
+
+                                        <ul class="meta-inner">
+                                            <li>
+                                                <img src="/frontend/img/icon/location2.png" alt="img" loading="lazy">
+                                                <%= property.state %>
+                                            </li>
+                                            <li>For Sale</li>
+                                        </ul>
+
+                                        <p>
+                                            <%= property.description ? property.description.split(' ').slice(0, 20).join(' ') : '' %>...
+                                        </p>
+
+                                    </div>
+
                                 </div>
-                                   
-                            </div>
-                            </a>
-                        </div>
-                <% }); %>
 
-                    </div>
+                            </a>
+
+                        </div>
+                    <% }); %>
+
                 </div>
-               
+
+
+                 <div class="text-center mt-4 mb-4">
+  <a href="/properties-category?category=land" class="view-btn">
+    View Land Properties
+  </a>
+</div>
+              
+
             </div>
+        </div>
+
+    </div>
+</div>
         </div>
     </div>
     <!-- Propartes area end -->

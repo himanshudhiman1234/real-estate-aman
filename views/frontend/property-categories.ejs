@@ -24,33 +24,45 @@
     <div class="row justify-content-center">
       <div class="col-12">
         <!-- Search & Sort -->
-        <div class="product-search-inner bg-main">
-          <div class="row custom-gutters-20">
-            <div class="col-md-3 align-self-center">
-              <!-- <h5><%= totalCount %> Properties</h5> -->
-            </div>
+       <div class="product-search-inner bg-main">
+  <form action="/properties-category" method="get">
+    <div class="row custom-gutters-20">
 
-            <div class="col-md-6 mt-2 mt-md-0">
-              <div class="widget-search">
-                <form action="/properties" method="get">
-                  <div class="single-search-inner">
-                    <input type="text" name="search" value="<%= typeof search !== 'undefined' ? search : '' %>" placeholder="Search your address">
-                    <button><i class="la la-search"></i></button>
-                  </div>
-              </div>
-            </div>
+      <div class="col-md-3 align-self-center">
+        <!-- <h5>Properties</h5> -->
+      </div>
 
-            <div class="col-md-3 mt-2 mt-md-0 align-self-center">
-              <div class="single-select-inner">
-                <select name="sort" class="form-control" onchange="this.form.submit()">
-                  <option value="">Sort By</option>
-                  <option value="asc" <%= sort === 'asc' ? 'selected' : '' %>>Price: Low to High</option>
-                  <option value="desc" <%= sort === 'desc' ? 'selected' : '' %>>Price: High to Low</option>
-                </select>
-              </div>
-            </div>
-            </form>
+      <div class="col-md-6 mt-2 mt-md-0">
+        <input type="hidden" name="category" value="<%= category %>">
+
+        <div class="widget-search">
+          <div class="single-search-inner">
+            <input
+              type="text"
+              name="search"
+              value="<%= typeof search !== 'undefined' ? search : '' %>"
+              placeholder="Search your address"
+            >
+            <button type="submit">
+              <i class="la la-search"></i>
+            </button>
           </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 mt-2 mt-md-0 align-self-center">
+        <div class="single-select-inner">
+          <select name="sort" class="form-control" onchange="this.form.submit()">
+            <option value="">Sort By</option>
+            <option value="asc">Price: Low to High</option>
+            <option value="desc">Price: High to Low</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</div>
         </div>
       </div>    
 
@@ -60,15 +72,16 @@
           flex-direction: column;
           height: 100%;
         }
-        .thumb {
-          height: 200px;
-          overflow: hidden;
-        }
-        .thumb img {
-          height: 100%;
-          width: 100%;
-          object-fit: cover;
-        }
+      .thumb {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
         .product-details-inner {
           flex: 1;
           padding: 10px;
@@ -90,7 +103,7 @@
           text-align: center;
           width: 50.33%;
         }
-        .price-row{
+                .price-row{
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -134,22 +147,28 @@
                       } else {
                         return price.toLocaleString('en-IN');
                       }
-                  } 
-                  
-                  const perUnitPrice = property.area > 0 ? property.price / property.area : 0;
+                  } %>
+                  <div class="price-row">
 
-                  %>
 
-                 
-               <div class="price-row">
-  <span class="price">₹ <%= formatIndianPrice(property.price) %></span>
-  <span>₹ <%= formatIndianPrice(property.price / property.area)%>/ <%= property.areameasure %> </span>
+                    <span class="price">₹ <%= formatIndianPrice(property.price) %></span>
+  <% if (property.category === 'land') { %>
+  <span>
+    ₹ <%= formatIndianPrice(property.price / property.area) %> /
+    <%= property.areameasure %>
+  </span>
+<% } %>
+                  </div>
 
-</div>
                 </div>
 
                 <div class="product-meta-bottom style-2">
-                  <span><b><%= property.LandType %> Land</b></span>
+                   <% if (property.category == "flats" || property.category == "plots" || property.category == "house") { %>
+                      <span><b><%= property.bhk %> BHK</b></span>
+                    <% } else { %>
+                     <span><b><%= property.LandType %> Land</b></span>
+                  <% } %>
+                 
                   <span class="border-none"><b><%= property.city %></b> <span>City</span></span>
                 </div>         
               </div>
@@ -158,37 +177,7 @@
         <% }); %>
       </div>
        
-      <!-- Pagination -->
-      <div class="pagination-area text-center mt-4" style="margin-bottom:32px">
-        <ul class="pagination">
-          <% if (currentPage > 1) { %>
-            <li class="page-item">
-              <a class="page-link" 
-                 href="?search=<%= search %>&sort=<%= sort %>&state=<%= state %>&city=<%= city %>&page=<%= currentPage - 1 %>">
-                <i class="la la-angle-double-left"></i>
-              </a>
-            </li>
-          <% } %>
-
-          <% for (let i = 1; i <= totalPages; i++) { %>
-            <li class="page-item <%= i === currentPage ? 'active' : '' %>">
-              <a class="page-link" 
-                 href="?search=<%= search %>&sort=<%= sort %>&state=<%= state %>&city=<%= city %>&page=<%= i %>">
-                <%= i %>
-              </a>
-            </li>
-          <% } %>
-
-          <% if (currentPage < totalPages) { %>
-            <li class="page-item">
-              <a class="page-link" 
-                 href="?search=<%= search %>&sort=<%= sort %>&state=<%= state %>&city=<%= city %>&page=<%= currentPage + 1 %>">
-                <i class="la la-angle-double-right"></i>
-              </a>
-            </li>
-          <% } %>
-        </ul>
-      </div> 
+    
     </div>
   </div>
 </div>
