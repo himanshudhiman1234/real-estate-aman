@@ -1,0 +1,55 @@
+<%- include('../../partials/admin/navbar') %>
+
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid" >
+
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Sell your property</h6>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="form-container container">
+                                <!-- <h2 class="mb-4">Post Your Property for Sale</h2> -->
+                                <form action="/admin/upload-file-land" method="POST" enctype="multipart/form-data">
+                                  <div class="row">
+                                    <!-- Column 1 -->
+                                    <div class="col-md-6">
+                                         <div class="mb-3">
+                                        <label>Property Title</label>
+                                      <input type="file" name="file" accept=".xlsx" />
+  <% if (typeof failedRows !== "undefined" && failedRows.length > 0) { %>
+  <% failedRows.forEach((item) => { %>
+    <div>
+      <p>Row: <%= item.rowNumber %></p>
+      <p>Reason: <%= item.reason %></p>
+      <p>State: <%= item.state || "" %></p>
+      <p>City: <%= item.city || "" %></p>
+      <pre><%= JSON.stringify(item.row, null, 2) %></pre>
+    </div>
+    <hr>
+  <% }) %>
+<% } %>
+                                      </div>
+                                
+                                 
+                              
+                           <button type="submit" class="btn btn-primary mt-4">Submit Property</button>
+                                </form>
+                              </div>
+                              
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+
+          
+              
+
+
+<%- include('../../partials/admin/footer') %>
