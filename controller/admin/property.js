@@ -22,7 +22,7 @@ const property = async (req,res) =>{
 
 
 const properties = async(req,res) =>{
-    const property = await Property.find().sort({ createdAt: -1 });
+    const property = await Property.find().sort({ _id: -1 });
     
     console.log("property",property)
 

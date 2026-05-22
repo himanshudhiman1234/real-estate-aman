@@ -76,7 +76,7 @@
                             href="https://datatables.net">official DataTables documentation</a>.</p> -->
 
                     <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
+                    <div class="card shadow mb-4" >
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">List Property</h6>
                             <div class="addproperty">
@@ -92,7 +92,7 @@
 <% if (error_msg && error_msg.length > 0) { %>
   <div class="alert alert-danger m-3"><%= error_msg[0] %></div>
 <% } %>
-                        <div class="card-body">
+                        <div class="card-body" style="border: 2px solid red;">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
@@ -185,6 +185,8 @@
 
         })
     });
+
+    
 
 </script>
 <%- include('../../partials/admin/footer') %>
