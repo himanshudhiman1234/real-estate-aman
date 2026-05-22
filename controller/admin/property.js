@@ -22,8 +22,8 @@ const property = async (req,res) =>{
 
 
 const properties = async(req,res) =>{
-    const property = await Property.find();
-   
+    const property = await Property.find({createdAt:-1});
+    
     res.render("admin/property/index",{property})
 }
 
